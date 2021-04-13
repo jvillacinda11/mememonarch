@@ -22,3 +22,5 @@ router.post('/users/login', (req, res) => {
     res.json
   })
 })
+
+module.exports = router

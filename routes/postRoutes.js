@@ -41,4 +41,5 @@ router.get('/posts', (req, res) =>{
 })
 
 //exported
+
 module.exports = router
