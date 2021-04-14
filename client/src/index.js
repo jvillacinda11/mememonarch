@@ -1,6 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, { render } from 'react-dom';
 import App from './App';
+import { storage } from './firebase';
+
+const ReactFirebaseFileUpload = () => {
+  return (
+  
+  );
+};
+
+render(<ReactFirebaseFileUpload />, document.querySelector("#root"));
 
 ReactDOM.render(
   <React.StrictMode>
