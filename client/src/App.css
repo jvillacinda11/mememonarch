@@ -1,0 +1,21 @@
+.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: rgb(184, 174, 174);
+}
+
+.card-header {
+  border-top: 5px solid rgb(127, 124, 126);
+  border-left: 5px solid rgb(127, 124, 126);
+  border-right: 5px solid rgb(127, 124, 126);
+}
+
+.card-body {
+  border-left: 5px solid rgb(127, 124, 126);
+  border-bottom: 5px solid rgb(127, 124, 126);
+  border-right: 5px solid rgb(127, 124, 126);
+}
+
+/* .aboutApp, .profileApp, .loginApp, html {
+  background-color: rgb(184, 174, 174);
+} */
