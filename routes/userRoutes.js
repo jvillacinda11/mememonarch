@@ -25,9 +25,9 @@ router.get('/users', passport.authenticate('jwt'), (req, res) => {
 })
 
 router.get('/users/search/:username', (req, res ) =>{
-  User.findOne({username : {"$regex": req.params.username, "$options": "i"}}).populate('posts').exec(function (err, data){
+  User.findOne({username : {"$regex": req.params.username, "$options": "i"}}).exec(function (err, data){
     if (err){console.log(err)}
-    res.json(data.posts)
+    res.json(data)
   })
   })
 
