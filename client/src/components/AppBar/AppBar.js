@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
   Collapse,
-  Navbar as NavigationBar,
+  Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
@@ -12,50 +12,66 @@ import {
   DropdownMenu,
   DropdownItem,
   NavbarText
-
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import User from '../../utils/User'
 import './AppBar.css'
 
 const AppBar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const [collapsed, setCollapsed] = useState(true)
-  const toggleNavbar = () => setCollapsed(!collapsed)
+  const toggle = () => setIsOpen(!isOpen)
 
+  const handleLogOut = () => {
+    localStorage.removeItem('user')
+    window.location = '/login'
+  }
 
+  useEffect(() => {
+    User.profile()
+      .then(() => setIsLoggedIn(true))
+      .catch(() => setIsLoggedIn(false))
+  }, [])
   return (
-    <>
-      <NavigationBar color='light' light>
-        <NavbarBrand href='/' className='mr-auto'>MemeMonarch</NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className='mr-2' />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
+    <Navbar color='light' light expand='md'>
+      
+      <Link to='/' className='link'>
+        <NavbarBrand>MemeMonarch</NavbarBrand>
+      </Link>
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className='mr-auto' navbar>
+          {
+            !isLoggedIn &&
             <NavItem>
-              <NavLink>
-                <Link to='/'>Home</Link>
-                {/* <Link to='/week10-day04/' className='navLink'>Home</Link> */}
-              </NavLink>
+              <Link to='/login' className='link'>
+                <NavLink>Register/Login</NavLink>
+              </Link>
             </NavItem>
-            <NavItem>
-              <NavLink>
-                <Link to='/Login'>Login</Link>
-                {/* <Link to='/week10-day04/profile' className='navLink'>Profile</Link> */}
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>
-                <Link to='/Profile'>Profile</Link>
-              </NavLink>
-            </NavItem>
-
-          </Nav>
-        </Collapse>
-      </NavigationBar>
-    </>
-
-
+          }
+          {
+            isLoggedIn &&
+            <>
+              <NavItem>
+                <Link to='/profile' className='link'>
+                  <NavLink>My Profile</NavLink>
+                </Link>
+              </NavItem>
+              {/* <NavItem>
+                <Link to='/' className='link'>
+                  <NavLink>Home</NavLink>
+                </Link>
+              </NavItem> */}
+              <NavItem>
+                <NavLink onClick={handleLogOut}>Log Out</NavLink>
+              </NavItem>
+            </>
+          }
+        </Nav>
+      </Collapse>
+    </Navbar>
   )
-
 }
 
 export default AppBar
