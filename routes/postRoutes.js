@@ -1,6 +1,6 @@
 const router = require('express').Router()
 //enter the model names in the { }
-const { Post } = require('../models')
+const { Post, User } = require('../models')
 const passport = require('passport')
 
 //I want everything in the website to be open to view including viewing other peoples' content. The only locked routes will be for making new posts and upvoting/downvoting
@@ -46,7 +46,7 @@ router.get('/posts', (req, res) => {
 
 //search function
 //  jose
-router.get('/posts/:uid', (req, res ) => {
+router.get('/posts/:_id', (req, res ) => {
   Post.find(req.params.uid)
     .then(posts => res.json)
 })

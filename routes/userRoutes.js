@@ -3,6 +3,7 @@
 const { User } = require('../models')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
+const router = require('express').Router()
 
 router.post('/users/register', (req, res) => {
   const { name, email, username } = req.body
@@ -23,11 +24,11 @@ router.get('/users', passport.authenticate('jwt'), (req, res) => {
   res.json(req.user)
 })
 
-router.get('/users/:username', (req, res ) =>{
-  User.findById(req.params.username)
-  .then(({ user }) =>{
-    res.json(user)
-  .catch(err => console.log(err))
+router.get('/users/search/:username', (req, res ) =>{
+  User.findOne({username : req.params.username}).populate('posts').exec(function (err, data){
+    if (err){console.log(err)}
+    res.json(data.posts)
   })
-})
+  })
+
 module.exports = router
