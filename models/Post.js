@@ -4,12 +4,19 @@ const { model, Schema } = require('mongoose')
 const Post = new Schema({
   title: String,
   body: String,
-  crowns: Number,
+  crowns: {
+    type: Number,
+    default: 0
+  },
   postDate: Date,
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  tags: [{
+    type: String,
+    default: null
+  }]
 })
 
 module.exports = model('Post', Post)

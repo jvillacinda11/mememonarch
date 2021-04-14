@@ -46,11 +46,12 @@ router.get('/posts', (req, res) => {
 
 //search function
 //  jose
-router.get('/posts/:_id', (req, res ) => {
-  Post.find(req.params.uid)
-    .then(posts => res.json)
+router.get('/posts/search/:title', (req, res) => {
+  Post.find({ title: { "$regex": req.params.title, "$options": "i" }}).exec(function (err, data) {
+    if (err) { console.log(err) }
+    res.json(data)
+  })
 })
-
 
 
 
