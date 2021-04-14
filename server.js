@@ -3,7 +3,8 @@ const express = require('express')
 const { join } = require('path')
 const passport = require('passport')
 const { Strategy: LocalStrategy } = require('passport-local')
-const { Strategy : JwtStrategy, ExtractJwt } = require('passport-jwt')
+const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
+const firebase = require('firebase')
 
 const app = express()
 const { User } = require('./models')
@@ -32,6 +33,8 @@ app.use(require('./routes'))
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
 })
+
+// const app = firebase.initializeApp({})
 
 require('./db')
   .then(() => app.listen(process.env.PORT || 3001))

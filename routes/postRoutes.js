@@ -1,5 +1,4 @@
 const router = require('express').Router()
-//enter the model names in the { }
 const { Post, User } = require('../models')
 const passport = require('passport')
 
@@ -24,6 +23,7 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
             id: post._id,
             title: post.title,
             body: post.body,
+            postDate: post.postDate,
             author: req.user
           })
         })

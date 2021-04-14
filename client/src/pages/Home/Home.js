@@ -21,10 +21,17 @@ function Home() {
 
   const handleCreatePost = event => {
     event.preventDefault()
+
+    const date = new Date()
+    const day = date.getDate()
+    const month = date.getMonth()
+    const year = date.getFullYear()
+
     Post.create({
       title: postState.title,
       body: postState.body,
-      crowns: 0
+      crowns: 0,
+      postDate: `${month + 1}/${day}/${year}`
     })
       .then(({ data: post }) => {
         console.log(post)
@@ -38,7 +45,7 @@ function Home() {
   useEffect(() => {
     Post.getAll()
       .then(({ data: posts }) => {
-        console.log(posts)
+        console.log(posts.map(post => post.postDate))
         setPostState({ ...postState, posts })
       })
       .catch(err => {
