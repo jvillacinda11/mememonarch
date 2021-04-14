@@ -14,8 +14,8 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
     title: req.body.title,
     body: req.body.body,
     author: req.user._id,
-    crowns: req.body.crowns
-    // postDate: Date.now
+    crowns: req.body.crowns,
+    postDate: req.body.postDate
   })
     .then(post => {
       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
@@ -24,6 +24,7 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
             id: post._id,
             title: post.title,
             body: post.body,
+            postDate: post.postDate,
             author: req.user
           })
         })

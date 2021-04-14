@@ -4,7 +4,7 @@ const Post = new Schema({
   title: String,
   body: String,
   crowns: Number,
-  postDate: Date,
+  postDate: String,
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User'
