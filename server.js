@@ -9,7 +9,7 @@ const app = express()
 const { User } = require('./models')
 
 app.use(express.static(join(__dirname, 'client', 'build')))
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(passport.initialize())
