@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose')
-
+//image might go into post? I still don't know
 const Post = new Schema({
   title: String,
   body: String,
