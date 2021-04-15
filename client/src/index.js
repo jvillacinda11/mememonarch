@@ -56,7 +56,7 @@ const ReactFirebaseFileUpload = () => {
   );
 };
 
-render(<ReactFirebaseFileUpload />, document.querySelector("#root"));
+// render(<ReactFirebaseFileUpload />, document.querySelector("#root"));
 
 ReactDOM.render(
   <React.StrictMode>
