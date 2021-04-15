@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM, { render } from 'react-dom';
 import App from './App';
 import { storage } from './firebase';
+import { useState, useEffect } from 'react'
 
 const ReactFirebaseFileUpload = () => {
   const [image, setImage] = useState(null);
@@ -56,7 +57,8 @@ const ReactFirebaseFileUpload = () => {
   );
 };
 
-render(<ReactFirebaseFileUpload />, document.querySelector("#root"));
+
+// render(<ReactFirebaseFileUpload />, document.querySelector("#root"));
 
 ReactDOM.render(
   <React.StrictMode>
