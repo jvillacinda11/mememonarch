@@ -35,7 +35,6 @@ const AppBar = () => {
   }, [])
   return (
     <Navbar color='light' light expand='md'>
-
       <Link to='/' className='link'>
         <NavbarBrand>MemeMonarch</NavbarBrand>
       </Link>
