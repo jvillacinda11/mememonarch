@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap'
 import User from '../../utils/User'
 
 import '../../App.css'
@@ -28,7 +28,7 @@ function Login() {
       email: loginState.email,
       username: loginState.username,
       password: loginState.password
-     
+
     })
       .then(() => {
         alert('User registered!')
@@ -51,69 +51,95 @@ function Login() {
   }
   return (
     <>
-      
-      <h1>Register</h1>
-      
+
+
+
+
       <Form inline onSubmit={handleRegister}>
-        <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-          <Label htmlFor='name' className='mr-sm-2'>Name</Label>
-          <Input
-            type='text'
-            name='name'
-            value={loginState.name}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-          <Label htmlFor='email' className='mr-sm-2'>email</Label>
-          <Input
-            type='email'
-            name='email'
-            value={loginState.email}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-          <Label htmlFor='username' className='mr-sm-2'>Username</Label>
-          <Input
-            type='text'
-            name='username'
-            value={loginState.username}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-          <Label htmlFor='password' className='mr-sm-2'>Password</Label>
-          <Input
-            type='password'
-            name='password'
-            value={loginState.password}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <Button onClick={handleRegister}>Register</Button>
+        <h1>Register</h1>
+        <Container className="center">
+          <Row xs="4">
+            <Col>
+              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+                <Label htmlFor='name' className='mr-sm-2'>Name</Label>
+                <Input
+                  type='text'
+                  name='name'
+                  value={loginState.name}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+                <Label htmlFor='email' className='mr-sm-2'>Email-Address</Label>
+                <Input
+                  type='email'
+                  name='email'
+                  value={loginState.email}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+                <Label htmlFor='username' className='mr-sm-2'>Username</Label>
+                <Input
+                  type='text'
+                  name='username'
+                  value={loginState.username}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col>
+              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+                <Label htmlFor='password' className='mr-sm-2'>Password</Label>
+                <Input
+                  type='password'
+                  name='password'
+                  value={loginState.password}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            </Col></Row><br />
+          <Button onClick={handleRegister}>Register</Button>
+        </Container>
       </Form>
-      <h1>Login</h1>
+
+
       <Form inline onSubmit={handleLogin}>
-        <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-          <Label htmlFor='un' className='mr-sm-2'>Username</Label>
-          <Input
-            type='text'
-            name='un'
-            value={loginState.un}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-          <Label htmlFor='pw' className='mr-sm-2'>Password</Label>
-          <Input
-            type='password'
-            name='pw'
-            value={loginState.pw}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <Button onClick={handleLogin}>Login</Button>
+        <h1 className="hh" >Login</h1>
+        <Container className="center">
+          <Row>
+            <Col xs="6" sm="4">
+              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+                <Label htmlFor='un' className='mr-sm-2'>Username</Label>
+                <Input
+                  type='text'
+                  name='un'
+                  value={loginState.un}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col xs="6" sm="4">
+              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+                <Label htmlFor='pw' className='mr-sm-2'>Password</Label>
+                <Input
+                  type='password'
+                  name='pw'
+                  value={loginState.pw}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+            </Col>
+            <Col sm="4">
+              <Button onClick={handleLogin}>Login</Button>
+            </Col>
+          </Row>
+        </Container>
+
       </Form>
 
 
