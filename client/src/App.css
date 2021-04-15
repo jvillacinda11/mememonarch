@@ -19,3 +19,11 @@
 /* .aboutApp, .profileApp, .loginApp, html {
   background-color: rgb(184, 174, 174);
 } */
+
+.center {
+  margin-top: 30px;
+}
+
+.hh {
+  margin-left: 40px;
+}
