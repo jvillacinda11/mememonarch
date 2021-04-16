@@ -7,16 +7,16 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
+  InputGroup,
+  InputGroupText,
+  InputGroupAddon,
+  Input
 } from 'reactstrap'
 import { Button, Form, FormControl} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import User from '../../utils/User'
 import './AppBar.css'
+import Logo from '../../assets/images/monarch.gif'
 
 const AppBar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -41,13 +41,22 @@ const AppBar = () => {
   }
   return (
     <Navbar color='light' light expand='md'>
+      <img id="logo" src={Logo} alt="King Pepe" />
       <Link to='/' className='link'>
         <NavbarBrand>MemeMonarch</NavbarBrand>
       </Link>
 
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
-        <Nav className='mr-auto' navbar>
+        <Nav navbar>
+          <InputGroup id="searchBar">
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Search</InputGroupText>
+            </InputGroupAddon>
+            <Input />
+          </InputGroup>
+        </Nav>
+        <Nav navbar>
           {
             !isLoggedIn &&
             <>
@@ -73,10 +82,10 @@ const AppBar = () => {
                 </Link>
               </NavItem>
               {/* <NavItem>
-                <Link to='/' className='link'>
-                  <NavLink>Home</NavLink>
-                </Link>
-              </NavItem> */}
+                  <Link to='/' className='link'>
+                    <NavLink>Home</NavLink>
+                  </Link>
+                </NavItem> */}
               <NavItem>
                 <NavLink onClick={handleLogOut}>Log Out</NavLink>
               </NavItem>
