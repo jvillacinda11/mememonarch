@@ -56,7 +56,7 @@ function Search() {
     .then(({data: tagPosts}) => {
       console.log(tagPosts)
       setTagState({ ...tagState, tagPosts: tagPosts, tag: ''})
-      console.log(tagState.tagPosts)
+      // console.log(tagState.tagPosts)
     })
     .catch(err => console.log(err))
   }

@@ -12,16 +12,17 @@ router.get('/searchUsers/byUsername/:username', (req, res) => {
 router.get('/searchPosts/byAuthor/:author', (req, res) => {
   Post.find({author: req.params.author}).exec(function (err, data) {
     if(err) {console.log(err)}
+    
     res.json(data)
   })
 })
 
 //Search posts by tags
 router.get('/searchPosts/byTag/:tag', (req, res) => {
-  Post.find({ tags: { $regex: new RegExp(req.params.tag, "i") }}).exec(function (err, data)  {
-    if(err){console.log(err)}
-    res.json(data)
-  })
+  Post.find({ tags: { $regex: new RegExp(req.params.tag, "i") }})
+  .populate('author')
+  .then(posts => res.json(posts))
+  .catch(err => console.log(err))
 })
 
 //search Posts by title
