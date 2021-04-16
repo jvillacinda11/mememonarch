@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import {
   Button, Form, FormGroup, Label, Input,
-  Card, CardText, CardBody,
-  CardTitle, CardSubtitle
+  Container, Row
 } from 'reactstrap'
 import Post from '../../utils/Post'
+import Posting from '../../components/Posting'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Home.css'
 
 function Home() {
   const [postState, setPostState] = useState({
@@ -77,19 +78,16 @@ function Home() {
         </FormGroup>
         <Button onClick={handleCreatePost}>Create Post</Button>
       </Form>
-      {
-        postState.posts.length
-          ? postState.posts.map(post => (
-            <Card key={post._id}>
-              <CardBody>
-                <CardTitle tag='h5'>{post.title}</CardTitle>
-                <CardSubtitle tag='h6' className='mb-2 text-muted'>posted by {post.author.username}</CardSubtitle>
-                <CardText>{post.body}</CardText>
-              </CardBody>
-            </Card>
-          ))
-          : null
-      }
+      <Container>
+        <Row>
+          {
+            postState.posts.length
+              ? postState.posts.map(post => (
+                <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} />
+              )) : null
+          }
+        </Row>
+      </Container>
     </>
   );
 }

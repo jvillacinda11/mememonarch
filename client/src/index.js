@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM, { render } from 'react-dom';
 import App from './App';
 import { storage } from './firebase';
-import { useState, useEffect } from 'react'
+
+import { useState } from 'react'
 
 const ReactFirebaseFileUpload = () => {
   const [image, setImage] = useState(null);
@@ -52,7 +53,7 @@ const ReactFirebaseFileUpload = () => {
       <br />
       {url}
       <br />
-      <img src={url || "http://via.placeholder.com/300"} alt="firebase-image" />
+      <img src={url || "http://via.placeholder.com/300"} alt="firebase" />
     </div>
   );
 };
