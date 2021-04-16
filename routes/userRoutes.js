@@ -24,12 +24,12 @@ router.get('/users', passport.authenticate('jwt'), (req, res) => {
   res.json(req.user)
 })
 
-router.get('/users/search/:username', (req, res ) =>{
-  User.find({username : {"$regex": req.params.username, "$options": "i"}}, 'username _id').exec(function (err, data){
-    if (err){console.log(err)}
+// router.get('/users/search/:username', (req, res ) =>{
+//   User.find({username : {"$regex": req.params.username, "$options": "i"}}, 'username _id').exec(function (err, data){
+//     if (err){console.log(err)}
 
-      res.json(data)
-  })
-  })
+//       res.json(data)
+//   })
+//   })
 
 module.exports = router

@@ -25,9 +25,9 @@ function Profile() {
       <h1>Your Info</h1>
       <Card>
         <CardBody>
-          <CardTitle tag='h5'>{profileState.user.name}</CardTitle>
-          <CardSubtitle tag='h6' className='mb-2 text-muted'>{profileState.user.email}</CardSubtitle>
-          <CardText>{profileState.user.username}</CardText>
+          <CardTitle tag='h5'>Name: {profileState.user.name}</CardTitle>
+          <CardSubtitle tag='h6' className='mb-2 text-muted'>Email: {profileState.user.email}</CardSubtitle>
+          <CardText>Username: {profileState.user.username}</CardText>
         </CardBody>
       </Card>
       <hr />
