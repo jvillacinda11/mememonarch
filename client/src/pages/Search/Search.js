@@ -107,11 +107,13 @@ function Search() {
       </Row>
       {
         titleState.titlePosts.length
-          && titleState.titlePosts.map((titlePosts, i) => <MyCard key={i} posts={titlePosts} />)
+          ? titleState.titlePosts.map((titlePosts, i) => <MyCard key={i} posts={titlePosts} />)
+          : null
       }
       {
         tagState.tagPosts.length
-        && tagState.tagPosts.map((tagPosts, i) => <MyCard key= {i} posts={tagPosts} />) 
+        ? tagState.tagPosts.map((tagPosts, i) => <MyCard key= {i} posts={tagPosts} />) 
+        : null
       }
    </>
   )
