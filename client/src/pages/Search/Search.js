@@ -16,14 +16,6 @@ function Search() {
   // axios.get(`/api/searchPosts/byAuthor/60775be7beea745604e315b2`)
   // .then(({data :posts}) => console.log(posts))
 
-  //          Search posts by tags
-
-  // axios.get(`/api/searchPosts/byTag/for`)
-  // .then(({data : posts}) => console.log(posts))
-
-  //          Search posts by title
-  // axios.get(`/api/searchPosts/byTitle/h`)
-  // .then(({data : posts}) => console.log(posts))
   const [titleState, setTitleState] = 
   useState({
     title: '',
@@ -33,7 +25,7 @@ function Search() {
   const [tagState, setTagState] =
     useState({
       tag: '',
-      posts: []
+      tagPosts: []
     })
  
 
@@ -61,7 +53,11 @@ function Search() {
     event.preventDefault()
     axios.get(`/api/searchPosts/byTag/${tagState.tag}`)
     //change the content after "then"
-    .then(({data: posts}) => console.log(posts))
+    .then(({data: tagPosts}) => {
+      console.log(tagPosts)
+      setTagState({ ...tagState, tagPosts: tagPosts, tag: ''})
+      // console.log(tagState.tagPosts)
+    })
     .catch(err => console.log(err))
   }
 
@@ -111,10 +107,14 @@ function Search() {
       </Row>
       {
         titleState.titlePosts.length
-          && titleState.titlePosts.map((titlePosts, i) => <MyCard key={i} posts={titlePosts} />)
+          ? titleState.titlePosts.map((titlePosts, i) => <MyCard key={i} posts={titlePosts} />)
+          : null
       }
-      {/* <h1>Title: {titleState.titlePosts[0].title}</h1>
-      <h1>Post: {titlePosts[0].body}</h1> */}
+      {
+        tagState.tagPosts.length
+        ? tagState.tagPosts.map((tagPosts, i) => <MyCard key= {i} posts={tagPosts} />) 
+        : null
+      }
    </>
   )
 
