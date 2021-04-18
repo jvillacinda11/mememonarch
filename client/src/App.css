@@ -27,3 +27,11 @@
 .hh {
   margin-left: 40px;
 }
+
+.imgalign {
+  margin: 5px;
+  border-top: 2px solid rgb(127, 124, 126);
+  border-left: 2px solid rgb(127, 124, 126);
+  border-bottom: 2px solid rgb(127, 124, 126);
+  border-right: 2px solid rgb(127, 124, 126);
+}

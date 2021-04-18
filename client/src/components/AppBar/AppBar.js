@@ -57,11 +57,11 @@ const AppBar = () => {
                   <NavLink>My Profile</NavLink>
                 </Link>
               </NavItem>
-              {/* <NavItem>
-                <Link to='/' className='link'>
-                  <NavLink>Home</NavLink>
+              <NavItem>
+                <Link to='/Formupload' className='link'>
+                  <NavLink>Formupload</NavLink>
                 </Link>
-              </NavItem> */}
+              </NavItem>
               <NavItem>
                 <NavLink onClick={handleLogOut}>Log Out</NavLink>
               </NavItem>

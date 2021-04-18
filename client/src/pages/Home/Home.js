@@ -5,8 +5,10 @@ import {
   CardTitle, CardSubtitle
 } from 'reactstrap'
 import Post from '../../utils/Post'
+import '../../App.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function Home() {
   const [postState, setPostState] = useState({

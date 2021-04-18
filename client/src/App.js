@@ -9,6 +9,7 @@ import {
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import Formupload from './components/Formupload'
 
 import AppBar from './components/AppBar'
 
@@ -35,6 +36,10 @@ function App() {
             <Route path='/profile'>
               <Profile />
             </Route>
+          
+          <Route path='/Formupload'>
+            <Formupload />
+          </Route>
           </Switch>
         </div>
       </Router>
