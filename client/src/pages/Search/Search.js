@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Container, Row, Col} from 'react
 // import User from '../../utils/User'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import MyCard from '../../components/Card'
+import Posting from '../../components/Posting'
 
 function Search() {
   //          Search User byusername
@@ -105,16 +105,20 @@ function Search() {
         </Container>
       </Form>
       </Row>
+      <Container>
+      <Row>
       {
         titleState.titlePosts.length
-          ? titleState.titlePosts.map((titlePosts, i) => <MyCard key={i} posts={titlePosts} />)
+          ? titleState.titlePosts.map((titlePosts, i) => <Posting key={i} id={titlePosts._id} title={titlePosts.title} username={titlePosts.author.username} body={titlePosts.body} />)
           : null
       }
       {
         tagState.tagPosts.length
-        ? tagState.tagPosts.map((tagPosts, i) => <MyCard key= {i} posts={tagPosts} />) 
+              ? tagState.tagPosts.map((tagPosts, i) => <Posting key={i} id={tagPosts._id} title={tagPosts.title} username={tagPosts.author.username} body={tagPosts.body} />)
         : null
       }
+      </Row>
+      </Container>
    </>
   )
 
@@ -123,3 +127,14 @@ function Search() {
 export default Search;
 
 // good reference https://github.com/oze4/react-navbar-search-with-routing
+
+{/* <Container>
+  <Row>
+    {
+      postState.posts.length
+        ? postState.posts.map(post => (
+          <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} />
+        )) : null
+    }
+  </Row>
+</Container> */}
