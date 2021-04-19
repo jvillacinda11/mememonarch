@@ -98,7 +98,7 @@ const AppBar = () => {
           }
         </Nav>
       </Collapse>     
-       <Form inline onSumbit = {handleFormSubmit}>
+       <Form inline onSubmit = {handleFormSubmit}>
         <FormControl
         type= 'text'
         placeholder = 'Search'

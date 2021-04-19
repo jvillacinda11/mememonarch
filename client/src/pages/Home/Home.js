@@ -5,6 +5,7 @@ import {
 } from 'reactstrap'
 import Post from '../../utils/Post'
 import Posting from '../../components/Posting'
+import DragAndDrop from '../../components/DragAndDrop'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css'
@@ -54,6 +55,7 @@ function Home() {
         window.location = '/login'
       })
   }, [])
+
   return (
     <>
       <h1>Create A Post</h1>
@@ -76,6 +78,7 @@ function Home() {
             onChange={handleInputChange}
           />
         </FormGroup>
+        <DragAndDrop />
         <Button onClick={handleCreatePost}>Create Post</Button>
       </Form>
       <Container>
