@@ -66,7 +66,7 @@ function Search() {
    {/* this is going to be the search by title form */}
    <Row className= 'searchBox'>
   <Form inline onSubmit = {handleSearchTitle}>
-  <Container className ="center">
+  <Container className ="center brown">
   <h4>Search by Title</h4>
     <Row xs ="4">
       <Col>
@@ -86,7 +86,7 @@ function Search() {
    </Form>
 
       <Form inline onSubmit={handleSearchTag}>
-        <Container className="center">
+        <Container className="center brown">
           <h4>Search by Tag</h4>
           <Row xs="4">
             <Col>

@@ -57,7 +57,7 @@ function Login() {
 
       <Form inline onSubmit={handleRegister}>
         <h1>Register</h1>
-        <Container className="center">
+        <Container className="center brown">
           <Row xs="4">
             <Col>
               <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
@@ -110,7 +110,7 @@ function Login() {
 
       <Form inline onSubmit={handleLogin}>
         <h1 className="hh" >Login</h1>
-        <Container className="center">
+        <Container className="center brown">
           <Row>
             <Col xs="6" sm="4">
               <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
