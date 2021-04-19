@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import App from './App';
-import { storage } from './firebase';
 
 import { useState } from 'react'
 

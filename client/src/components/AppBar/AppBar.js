@@ -87,6 +87,11 @@ const AppBar = () => {
                   </Link>
                 </NavItem> */}
               <NavItem>
+                <Link to='/Formupload' className='link'>
+                  <NavLink>Formupload</NavLink>
+                </Link>
+              </NavItem>
+              <NavItem>
                 <NavLink onClick={handleLogOut}>Log Out</NavLink>
               </NavItem>
               <NavItem>
