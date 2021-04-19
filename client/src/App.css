@@ -1,7 +1,7 @@
 .container {
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: rgb(184, 174, 174);
+
 }
 
 .card-header {
@@ -32,4 +32,14 @@
   margin-left: auto;
   margin-right: auto;
   width: fit-content
+}
+.imgalign {
+  margin: 5px;
+  border-top: 2px solid rgb(127, 124, 126);
+  border-left: 2px solid rgb(127, 124, 126);
+  border-bottom: 2px solid rgb(127, 124, 126);
+  border-right: 2px solid rgb(127, 124, 126);
+}
+.brown{
+    background-color: rgb(184, 174, 174);
 }

@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Container, Row, Col} from 'react
 // import User from '../../utils/User'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import MyCard from '../../components/Card'
+import Posting from '../../components/Posting'
 
 function Search() {
   //          Search User byusername
@@ -16,14 +16,6 @@ function Search() {
   // axios.get(`/api/searchPosts/byAuthor/60775be7beea745604e315b2`)
   // .then(({data :posts}) => console.log(posts))
 
-  //          Search posts by tags
-
-  // axios.get(`/api/searchPosts/byTag/for`)
-  // .then(({data : posts}) => console.log(posts))
-
-  //          Search posts by title
-  // axios.get(`/api/searchPosts/byTitle/h`)
-  // .then(({data : posts}) => console.log(posts))
   const [titleState, setTitleState] = 
   useState({
     title: '',
@@ -33,7 +25,7 @@ function Search() {
   const [tagState, setTagState] =
     useState({
       tag: '',
-      posts: []
+      tagPosts: []
     })
  
 
@@ -61,7 +53,11 @@ function Search() {
     event.preventDefault()
     axios.get(`/api/searchPosts/byTag/${tagState.tag}`)
     //change the content after "then"
-    .then(({data: posts}) => console.log(posts))
+    .then(({data: tagPosts}) => {
+      console.log(tagPosts)
+      setTagState({ ...tagState, tagPosts: tagPosts, tag: ''})
+      // console.log(tagState.tagPosts)
+    })
     .catch(err => console.log(err))
   }
 
@@ -70,7 +66,7 @@ function Search() {
    {/* this is going to be the search by title form */}
    <Row className= 'searchBox'>
   <Form inline onSubmit = {handleSearchTitle}>
-  <Container className ="center">
+  <Container className ="center brown">
   <h4>Search by Title</h4>
     <Row xs ="4">
       <Col>
@@ -90,7 +86,7 @@ function Search() {
    </Form>
 
       <Form inline onSubmit={handleSearchTag}>
-        <Container className="center">
+        <Container className="center brown">
           <h4>Search by Tag</h4>
           <Row xs="4">
             <Col>
@@ -109,12 +105,20 @@ function Search() {
         </Container>
       </Form>
       </Row>
+      <Container>
+      <Row>
       {
         titleState.titlePosts.length
-          && titleState.titlePosts.map((titlePosts, i) => <MyCard key={i} posts={titlePosts} />)
+          ? titleState.titlePosts.map((titlePosts, i) => <Posting key={i} id={titlePosts._id} title={titlePosts.title} username={titlePosts.author.username} body={titlePosts.body} />)
+          : null
       }
-      {/* <h1>Title: {titleState.titlePosts[0].title}</h1>
-      <h1>Post: {titlePosts[0].body}</h1> */}
+      {
+        tagState.tagPosts.length
+              ? tagState.tagPosts.map((tagPosts, i) => <Posting key={i} id={tagPosts._id} title={tagPosts.title} username={tagPosts.author.username} body={tagPosts.body} />)
+        : null
+      }
+      </Row>
+      </Container>
    </>
   )
 
@@ -123,3 +127,14 @@ function Search() {
 export default Search;
 
 // good reference https://github.com/oze4/react-navbar-search-with-routing
+
+{/* <Container>
+  <Row>
+    {
+      postState.posts.length
+        ? postState.posts.map(post => (
+          <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} />
+        )) : null
+    }
+  </Row>
+</Container> */}

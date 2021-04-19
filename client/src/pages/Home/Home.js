@@ -6,9 +6,11 @@ import {
 import Post from '../../utils/Post'
 import Posting from '../../components/Posting'
 import DragAndDrop from '../../components/DragAndDrop'
+import '../../App.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css'
+
 
 function Home() {
   const [postState, setPostState] = useState({

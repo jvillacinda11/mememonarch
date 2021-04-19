@@ -34,7 +34,7 @@ const AppBar = () => {
       .then(() => setIsLoggedIn(true))
       .catch(() => setIsLoggedIn(false))
   }, [])
-//        this is where my send to route search and the search text that will be sent there goes.
+//        this is where my send to route search and the search text that will be sent there goes.cd
   const handleFormSubmit = event => {
     event.preventDefault()
     // alert('hi')
@@ -86,6 +86,11 @@ const AppBar = () => {
                     <NavLink>Home</NavLink>
                   </Link>
                 </NavItem> */}
+              <NavItem>
+                <Link to='/Formupload' className='link'>
+                  <NavLink>Formupload</NavLink>
+                </Link>
+              </NavItem>
               <NavItem>
                 <NavLink onClick={handleLogOut}>Log Out</NavLink>
               </NavItem>

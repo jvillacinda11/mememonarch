@@ -1,8 +1,11 @@
 const MyCard = ({ posts }) => {
   return(
     <div>
-      <h1>title: {posts.title}</h1>
-      <h3>{posts.body}</h3>
+      <h3>title: {posts.title}</h3>
+      <h4>Author: {posts.author.username}</h4>
+      <p>{posts.body}</p>
+      <p>Tags: {posts.tags}</p>
+      <p>crowns: {posts.crowns}</p>
     </div>
   )
 }
