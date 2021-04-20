@@ -80,10 +80,10 @@ const ReactFirebaseFileUpload = () => {
         <br />
         {url}
         <br />
-        {/* <img src={url || "http://via.placeholder.com/250X250"} alt="firebase-image" /> */}
-        {images?.map((image, i )=> (
+        <img src={url || "http://via.placeholder.com/250X250"} alt="firebase-image" />
+        {/* {images?.map((image, i )=> (
           <img className='imgalign' src={images[images.length-1-i] || "http://via.placeholder.com/250X250"} alt="firebase-image" />
-        ))}
+        ))} */}
       </div>
     </>
 
