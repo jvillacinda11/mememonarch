@@ -116,7 +116,7 @@ function Search() {
       <Row>
       {
         resultsState.results.length
-              ? resultsState.results.map((results, i) => <Posting key={i} id={results._id} title={results.title} username={results.author.username} body={results.body} />)
+              ? resultsState.results.map((results, i) => <Posting key={i} id={results._id} title={results.title} username={results.author.username} body={results.body} crowns={results.crowns}/>)
           : null
       }
 

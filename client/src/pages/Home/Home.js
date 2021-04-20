@@ -85,7 +85,7 @@ function Home() {
           {
             postState.posts.length
               ? postState.posts.map(post => (
-                <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} />
+                <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} crowns={post.crowns}/>
               )) : null
           }
         </Row>

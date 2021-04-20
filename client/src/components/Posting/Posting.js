@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 import Post from '../../utils/Post';
 
-const Posting = ({ id, title, username, body}) => {
+const Posting = ({ id, title, username, body, crowns}) => {
   return (
     <Col>
       <Card>
@@ -15,6 +15,7 @@ const Posting = ({ id, title, username, body}) => {
           <CardTitle tag="h5">{title}</CardTitle>
           <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle>
           <CardText>{body}</CardText>
+          <CardSubtitle>{crowns}</CardSubtitle>
         </CardBody>
       </Card>
     </Col>
