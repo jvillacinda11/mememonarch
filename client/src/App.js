@@ -39,10 +39,9 @@ function App() {
             <Route path ='/search'>
               <Search />
             </Route>
-          
-          <Route path='/Formupload'>
-            <Formupload />
-          </Route>
+            <Route path='/Formupload'>
+              <Formupload />
+            </Route>
           </Switch>
         </div>
       </Router>

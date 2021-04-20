@@ -1,12 +1,11 @@
-
 import { useState, useEffect } from 'react'
 import { storage } from '../../firebase';
+import DragAndDrop from '../DragAndDrop'
 import '../../App.css'
 
 import User from '../../utils/User'
 
 import Image from '../../utils/Image'
-
 
 const ReactFirebaseFileUpload = () => {
   const [image, setImage] = useState(null)
@@ -17,12 +16,8 @@ const ReactFirebaseFileUpload = () => {
   useEffect(()=>{
   Image.getAll().then(data=> {
     console.log(data)
-   setimages(data.data)
-
-
-  })
-
-
+    setimages(data.data)
+    })
   },[] )
 
   const handleChange = e => {
@@ -68,26 +63,23 @@ const ReactFirebaseFileUpload = () => {
     )
   }
 
-
-
   return (
     <>
       <div>
         <progress value={progress} max="100" />
-        <p> Firebase my{User.name} image upload!</p>
-        <input type='file' onChange={handleChange} />
+        <p> Firebase my {User.name} image upload!</p>
+        <DragAndDrop onChange={handleChange} />
+        {/* <input type='file' onChange={handleChange} /> */}
         <button onClick={handleUpload}>Upload</button>
         <br />
         {url}
         <br />
         {/* <img src={url || "http://via.placeholder.com/250X250"} alt="firebase-image" /> */}
         {images?.map((image, i )=> (
-          <img className='imgalign' src={images[images.length-1-i] || "http://via.placeholder.com/250X250"} alt="firebase-image" />
+          <img className='imgalign' src={images[images.length-1-i] || "http://via.placeholder.com/250X250"} alt="firebase" />
         ))}
       </div>
     </>
-
-
   );
 };
 

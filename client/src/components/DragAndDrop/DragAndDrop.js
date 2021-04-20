@@ -1,16 +1,16 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const DragAndDrop = () => {
+const DragAndDrop = ({ onChange }) => {
   const onDrop = useCallback(acceptedFiles => {
-
+    
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   return (
     <div {...getRootProps()}>
-      <input {...getInputProps()} />
+      <input {...getInputProps()} onChange={onChange}/>
       {
         isDragActive ?
           <p>Drop the files here ...</p> :
