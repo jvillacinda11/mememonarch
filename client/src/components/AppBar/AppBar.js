@@ -48,14 +48,14 @@ const AppBar = () => {
 
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
-        <Nav navbar>
+        {/* <Nav navbar>
           <InputGroup id="searchBar">
             <InputGroupAddon addonType="prepend">
               <InputGroupText>Search</InputGroupText>
             </InputGroupAddon>
             <Input />
           </InputGroup>
-        </Nav>
+        </Nav> */}
         <Nav navbar>
           {
             !isLoggedIn &&
@@ -87,8 +87,8 @@ const AppBar = () => {
                   </Link>
                 </NavItem> */}
               <NavItem>
-                <Link to='/Formupload' className='link'>
-                  <NavLink>Formupload</NavLink>
+                <Link to='/Upload' className='link'>
+                  <NavLink>Upload</NavLink>
                 </Link>
               </NavItem>
               <NavItem>

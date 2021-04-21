@@ -32,4 +32,4 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
     .catch(err => console.log(err))
 })
 
-module.exports = router
+// module.exports = router
