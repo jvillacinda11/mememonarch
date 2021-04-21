@@ -8,7 +8,6 @@ const Post = new Schema({
     type: Number,
     default: 0
   },
-  postDate: String,
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User'

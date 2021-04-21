@@ -24,7 +24,6 @@ function Home() {
   useEffect(() => {
     Post.getAll()
       .then(({ data: posts }) => {
-        console.log(posts.map(post => post.postDate))
         let arr = posts.sort((a, b) => new Date(a.created) - new Date(b.created)).reverse()
 
         setPostState({ ...postState, posts:arr })

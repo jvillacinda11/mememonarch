@@ -15,7 +15,6 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
     body: req.body.body,
     author: req.user._id,
     crowns: req.body.crowns
-    // postDate: Date.now
   })
     .then(post => {
       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
