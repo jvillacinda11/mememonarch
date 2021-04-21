@@ -39,10 +39,9 @@ function App() {
             <Route path ='/search'>
               <Search />
             </Route>
-          
-          <Route path='/Upload'>
-            <Upload />
-          </Route>
+            <Route path='/Upload'>
+              <Upload />
+            </Route>
           </Switch>
         </div>
       </Router>
