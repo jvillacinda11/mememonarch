@@ -34,7 +34,7 @@ const ReactFirebaseFileUpload = () => {
 
   const handleUpload = () => {
     console.log("image: ", image)
-
+    if(image) {
     const uploadTask = storage.ref(`image/${image.name}`).put(image)
     uploadTask.on("state_changed",
       snapshot => {
@@ -69,6 +69,18 @@ const ReactFirebaseFileUpload = () => {
       }
 
     )
+  }
+  else{
+      Post.create({
+        title: postState.title,
+        body: postState.body
+      })
+        .then(res => {
+
+          window.location = '/'
+        })
+  }
+  //ends here
   }
 
 
