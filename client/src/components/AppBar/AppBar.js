@@ -87,8 +87,8 @@ const AppBar = () => {
                   </Link>
                 </NavItem> */}
               <NavItem>
-                <Link to='/Formupload' className='link'>
-                  <NavLink>Formupload</NavLink>
+                <Link to='/Upload' className='link'>
+                  <NavLink>Upload</NavLink>
                 </Link>
               </NavItem>
               <NavItem>
