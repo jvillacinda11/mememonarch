@@ -2,6 +2,10 @@
 import { useState, useEffect } from 'react'
 import { storage } from '../../firebase';
 import '../../App.css'
+import {
+  Button, Form, FormGroup, Label, Input,
+  Container, Row
+} from 'reactstrap'
 
 import User from '../../utils/User'
 
@@ -73,14 +77,36 @@ const ReactFirebaseFileUpload = () => {
   return (
     <>
       <div>
-        <progress value={progress} max="100" />
+        {/* <progress value={progress} max="100" /> */}
+        {/* <h1>Create A Post</h1>
+        <Form inline >
+          <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+            <Label htmlFor='title' className='mr-sm-2'>Title</Label>
+            <Input
+              type='text'
+              name='title'
+              // value={postState.title}
+              // onChange={handleInputChange}
+            />
+          </FormGroup>
+          <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+            <Label htmlFor='body' className='mr-sm-2'>Body</Label>
+            <Input
+              type='textarea'
+              name='body'
+              // value={postState.body}
+              // onChange={handleInputChange}
+            />
+          </FormGroup>
+          <Button >Create Post</Button>
+        </Form> */}
         <p> Firebase my{User.name} image upload!</p>
         <input type='file' onChange={handleChange} />
         <button onClick={handleUpload}>Upload</button>
         <br />
         {url}
         <br />
-        <img src={url || "http://via.placeholder.com/250X250"} alt="firebase-image" />
+        {/* <img src={url || "http://via.placeholder.com/250X250"} alt="firebase-image" /> */}
         {/* {images?.map((image, i )=> (
           <img className='imgalign' src={images[images.length-1-i] || "http://via.placeholder.com/250X250"} alt="firebase-image" />
         ))} */}

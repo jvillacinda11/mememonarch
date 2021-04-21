@@ -48,7 +48,7 @@ function Home() {
   useEffect(() => {
     Post.getAll()
       .then(({ data: posts }) => {
-        console.log(posts.map(post => post.postDate))
+        console.log(posts)
         setPostState({ ...postState, posts })
       })
       .catch(err => {
@@ -59,7 +59,7 @@ function Home() {
   return (
     <>
       <h1>Create A Post</h1>
-      <Form inline onSubmit={handleCreatePost}>
+      <Form inline onSubmit={(e)=> handleCreatePost(e)}>
         <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
           <Label htmlFor='title' className='mr-sm-2'>Title</Label>
           <Input
@@ -78,12 +78,12 @@ function Home() {
             onChange={handleInputChange}
           />
         </FormGroup>
-        <Button onClick={handleCreatePost}>Create Post</Button>
+        <Button onClick={(e)=>handleCreatePost(e)}>Create Post</Button>
       </Form>
       <Container>
         <Row>
           {
-            postState.posts.length
+            postState.posts > 0
               ? postState.posts.map(post => (
                 <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} crowns={post.crowns}/>
               )) : null

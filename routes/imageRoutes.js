@@ -11,6 +11,22 @@ router.post('/image', passport.authenticate('jwt'), (req, res) => {
    .catch(err => console.log(err))
 })
 
+// router.post('/imageposts', passport.authenticate('jwt'), (req, res) => {
+//   Post.create({
+//     images: req.body.link
+//   })
+//     .then(post => {
+//       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
+//         .then(() => {
+//           res.json({
+
+//             images: req.body.link
+//           })
+//         })
+//         .catch(err => console.log(err))
+//     })
+//     .catch(err => console.log(err))
+// })
 
 router.get('/image', passport.authenticate('jwt'), (req, res) => {
   console.log(req.body)

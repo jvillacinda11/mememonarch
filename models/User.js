@@ -4,7 +4,6 @@ const User = new Schema({
   name: String,
   email: String,
   totalCrowns: Number,
-  images:[{type:String}],
   posts: [{
     type: Schema.Types.ObjectId,
     ref: 'Post'

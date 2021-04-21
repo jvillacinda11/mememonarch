@@ -6,7 +6,7 @@ const Image = {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
   }),
-  create: link => axios.post('/api/image', link, {
+  create: link => axios.post('/api/imageposts', link, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
