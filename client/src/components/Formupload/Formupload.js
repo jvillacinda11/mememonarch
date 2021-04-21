@@ -17,17 +17,26 @@ const ReactFirebaseFileUpload = () => {
   const [url, setUrl] = useState("")
   const [progress, setProgress] = useState(0)
   const [images, setimages] = useState([])
-
-  useEffect(()=>{
-  Image.getAll().then(data=> {
-    console.log(data)
-   setimages(data.data)
-
-
+  const [postState, setPostState] = useState({
+    title: '',
+    body: '',
+    posts: []
   })
+  const handleInputChange = ({ target }) => {
+    setPostState({ ...postState, [target.name]: target.value })
+  }
+
+  //    This uses an route that no longer works (see imageRoutes.js line 30)
+  // useEffect(()=>{
+  // Image.getAll().then(data=> {
+  //   console.log(data)
+  //  setimages(data.data)
 
 
-  },[] )
+  // })
+
+
+  // },[] )
 
   const handleChange = e => {
     if (e.target.files[0]) {
@@ -60,8 +69,18 @@ const ReactFirebaseFileUpload = () => {
           .getDownloadURL()
           .then(url => {
             console.log(url)
+            const date = new Date()
+            const day = date.getDate()
+            const month = date.getMonth()
+            const year = date.getFullYear()
             setUrl(url)
-            Image.create({link: url}).then(res => {
+            Image.create({
+              title: postState.title,
+              body: postState.body,
+              crowns: 0,
+              postDate: `${month + 1}/${day}/${year}`,
+              link: url})
+              .then(res => {
            setimages([...images, url])
 
             })
@@ -78,15 +97,15 @@ const ReactFirebaseFileUpload = () => {
     <>
       <div>
         {/* <progress value={progress} max="100" /> */}
-        {/* <h1>Create A Post</h1>
+        <h1>Create A Post</h1>
         <Form inline >
           <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
             <Label htmlFor='title' className='mr-sm-2'>Title</Label>
             <Input
               type='text'
               name='title'
-              // value={postState.title}
-              // onChange={handleInputChange}
+              value={postState.title}
+              onChange={handleInputChange}
             />
           </FormGroup>
           <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
@@ -94,15 +113,14 @@ const ReactFirebaseFileUpload = () => {
             <Input
               type='textarea'
               name='body'
-              // value={postState.body}
-              // onChange={handleInputChange}
+              value={postState.body}
+              onChange={handleInputChange}
             />
           </FormGroup>
-          <Button >Create Post</Button>
-        </Form> */}
+        </Form>
         <p> Firebase my{User.name} image upload!</p>
         <input type='file' onChange={handleChange} />
-        <button onClick={handleUpload}>Upload</button>
+        <button onClick={handleUpload}>Create Post</button>
         <br />
         {url}
         <br />

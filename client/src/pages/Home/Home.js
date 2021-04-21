@@ -83,9 +83,9 @@ function Home() {
       <Container>
         <Row>
           {
-            postState.posts > 0
+            postState.posts.length > 0
               ? postState.posts.map(post => (
-                <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} crowns={post.crowns}/>
+                <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} crowns={post.crowns} images= {post.images}/>
               )) : null
           }
         </Row>
