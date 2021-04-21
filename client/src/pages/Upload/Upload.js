@@ -7,7 +7,6 @@ import {
   Container, Row
 } from 'reactstrap'
 
-// import User from '../../utils/User'
 
 import Post from '../../utils/Post'
 
@@ -26,17 +25,6 @@ const ReactFirebaseFileUpload = () => {
     setPostState({ ...postState, [target.name]: target.value })
   }
 
-  //    This uses an route that no longer works (see imageRoutes.js line 30)
-  // useEffect(()=>{
-  // Image.getAll().then(data=> {
-  //   console.log(data)
-  //  setimages(data.data)
-
-
-  // })
-
-
-  // },[] )
 
   const handleChange = e => {
     if (e.target.files[0]) {
@@ -69,19 +57,14 @@ const ReactFirebaseFileUpload = () => {
           .getDownloadURL()
           .then(url => {
             console.log(url)
-            const date = new Date()
-            const day = date.getDate()
-            const month = date.getMonth()
-            const year = date.getFullYear()
+
             setUrl(url)
             Post.create({
               title: postState.title,
               body: postState.body,
-              // crowns: 0,
-              postDate: `${month + 1}/${day}/${year}`,
               link: url})
               .then(res => {
-          //  setimages([...images, url])
+
               window.location = '/'
             })
 
@@ -118,16 +101,11 @@ const ReactFirebaseFileUpload = () => {
             />
           </FormGroup>
         </Form>
-        {/* <p> Firebase my{User.name} image upload!</p> */}
         <input type='file' onChange={handleChange} />
         <button onClick={handleUpload}>Create Post</button>
         <br />
         {url}
         <br />
-        {/* <img src={url || "http://via.placeholder.com/250X250"} alt="firebase-image" /> */}
-        {/* {images?.map((image, i )=> (
-          <img className='imgalign' src={images[images.length-1-i] || "http://via.placeholder.com/250X250"} alt="firebase-image" />
-        ))} */}
       </div>
     </>
 
