@@ -19,10 +19,17 @@ function Home() {
 
 
 
+  //shweta added code in use effect for sorting post recent
+
   useEffect(() => {
     Post.getAll()
       .then(({ data: posts }) => {
-        setPostState({ ...postState, posts })
+        console.log(posts.map(post => post.postDate))
+        let arr = posts.sort((a, b) => new Date(a.created) - new Date(b.created)).reverse()
+
+        setPostState({ ...postState, posts:arr })
+        
+        console.log(arr)
       })
       .catch(err => {
         console.error(err)
