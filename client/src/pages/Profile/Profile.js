@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import {
   Card, CardText, CardBody,
-  CardTitle, CardSubtitle
+  CardTitle, CardSubtitle,
+  Container, Row, Col
 } from 'reactstrap'
 import User from '../../utils/User'
+import Posting from '../../components/Posting'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -31,20 +33,29 @@ function Profile() {
         </CardBody>
       </Card>
       <hr />
-      <h1>Your Posts</h1>
-      {
-        profileState.user.posts
-          ? profileState.user.posts.map(post => (
-            <Card key={post._id}>
-              <CardBody>
-                <CardTitle tag='h5'>{post.title}</CardTitle>
-                <CardSubtitle tag='h6' className='mb-2 text-muted'>posted by {profileState.user.username}</CardSubtitle>
-                <CardText>{post.body}</CardText>
-              </CardBody>
-            </Card>
-          ))
-          : null
-      }
+      <Container>
+        <Row>
+          <Col>
+            <h1>Your Posts</h1>
+          </Col>
+        </Row>
+        <Row>
+          {
+            profileState.user.posts
+              ? profileState.user.posts.map(post => (
+                <Posting
+                  id={post._id}
+                  title={post.title}
+                  username={post.author.username}
+                  body={post.body}
+                  crowns={post.crowns}
+                  images={post.images}
+                />
+              ))
+              : null
+          }
+        </Row>
+      </Container>
     </>
   );
 }
