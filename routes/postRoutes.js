@@ -22,7 +22,6 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
             id: post._id,
             title: post.title,
             body: post.body,
-            postDate: post.postDate,
             author: req.user,
             images: post.images
           })
