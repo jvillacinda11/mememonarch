@@ -5,7 +5,6 @@ import {
 } from 'reactstrap'
 import Post from '../../utils/Post'
 import Posting from '../../components/Posting'
-import DragAndDrop from '../../components/DragAndDrop'
 import '../../App.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -6,6 +6,7 @@ import {
   Button, Form, FormGroup, Label, Input,
   Container, Row
 } from 'reactstrap'
+import DragAndDrop from '../../components/DragAndDrop'
 
 // import User from '../../utils/User'
 
@@ -39,11 +40,11 @@ const ReactFirebaseFileUpload = () => {
   // },[] )
 
   const handleChange = e => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0])
-
-    }
-
+    // if (e.target.files[0]) {
+    //   setImage(e.target.files[0])
+    //   console.log(e.target.files[0])
+    // }
+    setImage(e[0])
   }
 
 
@@ -119,7 +120,7 @@ const ReactFirebaseFileUpload = () => {
           </FormGroup>
         </Form>
         {/* <p> Firebase my{User.name} image upload!</p> */}
-        <input type='file' onChange={handleChange} />
+        <DragAndDrop upload={handleChange}/>
         <button onClick={handleUpload}>Create Post</button>
         <br />
         {url}
