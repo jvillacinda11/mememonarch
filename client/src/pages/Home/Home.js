@@ -47,6 +47,8 @@ function Home() {
       .catch(err => console.error(err))
   }
 
+  //shweta added code in use effect for sorting post recent
+
   useEffect(() => {
     Post.getAll()
       .then(({ data: posts }) => {

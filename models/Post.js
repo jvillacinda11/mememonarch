@@ -17,6 +17,7 @@ const Post = new Schema({
     type: String,
     default: null
   }],
+  //shweta added
   created:{type: Date, default: Date.now}
 })
 
