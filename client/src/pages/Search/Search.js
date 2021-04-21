@@ -27,6 +27,12 @@ function Search() {
       tag: '',
       tagPosts: []
     })
+
+  const [resultsState, setResultsState] =
+    useState({
+      item: '',
+      results : []
+    })
  
 
   const handleTitleInputChange = ({target}) => {
@@ -43,8 +49,8 @@ function Search() {
     //change the content after then
       .then(({data : titlePosts}) => {
         console.log(titlePosts)
-        setTitleState({...titleState, titlePosts: titlePosts, title: '' })
-        console.log(titleState.titlePosts)
+        setTitleState({...titleState, title: '' })
+        setResultsState({...titleState, results: titlePosts})
       })
       .catch(err => console.log(err))
   }
@@ -55,7 +61,8 @@ function Search() {
     //change the content after "then"
     .then(({data: tagPosts}) => {
       console.log(tagPosts)
-      setTagState({ ...tagState, tagPosts: tagPosts, tag: ''})
+      setTagState({ ...tagState, tag: ''})
+      setResultsState({ ...tagState, results: tagPosts })
       // console.log(tagState.tagPosts)
     })
     .catch(err => console.log(err))
@@ -66,7 +73,7 @@ function Search() {
    {/* this is going to be the search by title form */}
    <Row className= 'searchBox'>
   <Form inline onSubmit = {handleSearchTitle}>
-  <Container className ="center">
+  <Container className ="center brown">
   <h4>Search by Title</h4>
     <Row xs ="4">
       <Col>
@@ -86,7 +93,7 @@ function Search() {
    </Form>
 
       <Form inline onSubmit={handleSearchTag}>
-        <Container className="center">
+        <Container className="center brown">
           <h4>Search by Tag</h4>
           <Row xs="4">
             <Col>
@@ -108,15 +115,11 @@ function Search() {
       <Container>
       <Row>
       {
-        titleState.titlePosts.length
-          ? titleState.titlePosts.map((titlePosts, i) => <Posting key={i} id={titlePosts._id} title={titlePosts.title} username={titlePosts.author.username} body={titlePosts.body} />)
+        resultsState.results.length
+              ? resultsState.results.map((results, i) => <Posting key={i} id={results._id} title={results.title} username={results.author.username} body={results.body} crowns={results.crowns} images={results.images}/>)
           : null
       }
-      {
-        tagState.tagPosts.length
-              ? tagState.tagPosts.map((tagPosts, i) => <Posting key={i} id={tagPosts._id} title={tagPosts.title} username={tagPosts.author.username} body={tagPosts.body} />)
-        : null
-      }
+
       </Row>
       </Container>
    </>

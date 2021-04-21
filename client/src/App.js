@@ -10,7 +10,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Search from './pages/Search'
-import Formupload from './components/Formupload'
+import Upload from './pages/Upload'
 
 import AppBar from './components/AppBar'
 
@@ -40,8 +40,8 @@ function App() {
               <Search />
             </Route>
           
-          <Route path='/Formupload'>
-            <Formupload />
+          <Route path='/Upload'>
+            <Upload />
           </Route>
           </Switch>
         </div>

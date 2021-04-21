@@ -13,6 +13,7 @@ const Post = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  images: String,
   tags: [{
     type: String,
     default: null
