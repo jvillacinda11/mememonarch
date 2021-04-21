@@ -7,9 +7,9 @@ import {
   Container, Row
 } from 'reactstrap'
 
-import User from '../../utils/User'
+// import User from '../../utils/User'
 
-import Image from '../../utils/Image'
+import Post from '../../utils/Post'
 
 
 const ReactFirebaseFileUpload = () => {
@@ -74,10 +74,10 @@ const ReactFirebaseFileUpload = () => {
             const month = date.getMonth()
             const year = date.getFullYear()
             setUrl(url)
-            Image.create({
+            Post.create({
               title: postState.title,
               body: postState.body,
-              crowns: 0,
+              // crowns: 0,
               postDate: `${month + 1}/${day}/${year}`,
               link: url})
               .then(res => {
@@ -118,7 +118,7 @@ const ReactFirebaseFileUpload = () => {
             />
           </FormGroup>
         </Form>
-        <p> Firebase my{User.name} image upload!</p>
+        {/* <p> Firebase my{User.name} image upload!</p> */}
         <input type='file' onChange={handleChange} />
         <button onClick={handleUpload}>Create Post</button>
         <br />

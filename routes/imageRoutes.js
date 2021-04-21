@@ -1,3 +1,7 @@
+//            this is not being used but the app will break if removed for whatever reason?
+
+
+
 const router = require('express').Router()
 const { Post, User } = require('../models')
 const passport = require('passport')
@@ -11,29 +15,30 @@ const passport = require('passport')
 //    .catch(err => console.log(err))
 // })
 
-router.post('/imageposts', passport.authenticate('jwt'), (req, res) => {
-  Post.create({
-    title: req.body.title,
-    body: req.body.body,
-    author: req.user._id,
-    images: req.body.link,
+// router.post('/posts', passport.authenticate('jwt'), (req, res) => {
+//   Post.create({
+//     title: req.body.title,
+//     body: req.body.body,
+//     author: req.user._id,
+//     images: req.body.link,
 
-  })
-    .then(post => {
-      User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
-        .then(() => {
-          res.json({
-            title: postState.title,
-            body: postState.body,
-            crowns: 0,
-            postDate: `${month + 1}/${day}/${year}`,
-            images: req.body.link
-          })
-        })
-        .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err))
-})
+//   })
+//     .then(post => {
+//       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
+//         .then(() => {
+//           res.json({
+//             id: post._id,
+//             title: post.title,
+//             body: post.body,
+//             postDate: post.postDate,
+//             author: req.user,
+//             images: post.images
+//           })
+//         })
+//         .catch(err => console.log(err))
+//     })
+//     .catch(err => console.log(err))
+// })
 
 
 
@@ -57,23 +62,23 @@ router.get('/image', passport.authenticate('jwt'), (req, res) => {
 })
 
 
-router.get('/image/:id', passport.authenticate('jwt'), (req, res) => {
-  console.log(req.body)
-  // const { name, email, username } = req.body
-  User.findOne({ _id: req.user._id })
-    .then(user => {
-      user=user.images.filter(U=> U!==req.params.id )
-      user.save()
-      // const images = user.images
-      // console.log(user, images)
-      res.json(user)
+// router.get('/image/:id', passport.authenticate('jwt'), (req, res) => {
+//   console.log(req.body)
+//   // const { name, email, username } = req.body
+//   User.findOne({ _id: req.user._id })
+//     .then(user => {
+//       user=user.images.filter(U=> U!==req.params.id )
+//       user.save()
+//       // const images = user.images
+//       // console.log(user, images)
+//       res.json(user)
 
 
-    }
+//     }
 
-    )
-    .catch(err => console.log(err))
-})
+//     )
+//     .catch(err => console.log(err))
+// })
 
 
 

@@ -8,13 +8,37 @@ const passport = require('passport')
 //   shweta
 // jose's edit
 // crowns shouldn't be part of the body because then a user could give themselves however much crowns they want instead of them being given by other users
+// router.post('/posts', passport.authenticate('jwt'), (req, res) => {
+//   Post.create({
+//     title: req.body.title,
+//     body: req.body.body,
+//     author: req.user._id,
+
+//     // crowns: req.body.crowns
+//     // postDate: Date.now
+//   })
+//     .then(post => {
+//       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
+//         .then(() => {
+//           res.json({
+//             id: post._id,
+//             title: post.title,
+//             body: post.body,
+//             postDate: post.postDate,
+//             author: req.user
+//           })
+//         })
+//         .catch(err => console.log(err))
+//     })
+//     .catch(err => console.log(err))
+// })
 router.post('/posts', passport.authenticate('jwt'), (req, res) => {
   Post.create({
     title: req.body.title,
     body: req.body.body,
     author: req.user._id,
-    // crowns: req.body.crowns
-    // postDate: Date.now
+    images: req.body.link,
+
   })
     .then(post => {
       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
@@ -24,7 +48,8 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
             title: post.title,
             body: post.body,
             postDate: post.postDate,
-            author: req.user
+            author: req.user,
+            images: post.images
           })
         })
         .catch(err => console.log(err))
