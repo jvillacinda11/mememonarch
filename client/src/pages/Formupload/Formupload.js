@@ -81,8 +81,8 @@ const ReactFirebaseFileUpload = () => {
               postDate: `${month + 1}/${day}/${year}`,
               link: url})
               .then(res => {
-           setimages([...images, url])
-
+          //  setimages([...images, url])
+              window.location = '/'
             })
 
           })

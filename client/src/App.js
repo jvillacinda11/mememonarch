@@ -10,7 +10,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Search from './pages/Search'
-import Formupload from './components/Formupload'
+import Formupload from './pages/Formupload'
 
 import AppBar from './components/AppBar'
 

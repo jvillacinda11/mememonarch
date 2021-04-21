@@ -48,14 +48,14 @@ const AppBar = () => {
 
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
-        <Nav navbar>
+        {/* <Nav navbar>
           <InputGroup id="searchBar">
             <InputGroupAddon addonType="prepend">
               <InputGroupText>Search</InputGroupText>
             </InputGroupAddon>
             <Input />
           </InputGroup>
-        </Nav>
+        </Nav> */}
         <Nav navbar>
           {
             !isLoggedIn &&
