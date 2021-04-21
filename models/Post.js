@@ -16,7 +16,8 @@ const Post = new Schema({
   tags: [{
     type: String,
     default: null
-  }]
+  }],
+  created:{type: Date, default: Date.now}
 })
 
 module.exports = model('Post', Post)

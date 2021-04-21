@@ -18,6 +18,8 @@ function Home() {
     posts: []
   })
 
+  
+
   const handleInputChange = ({ target }) => {
     setPostState({ ...postState, [target.name]: target.value })
   }
@@ -49,7 +51,11 @@ function Home() {
     Post.getAll()
       .then(({ data: posts }) => {
         console.log(posts.map(post => post.postDate))
-        setPostState({ ...postState, posts })
+        let arr = posts.sort((a, b) => new Date(a.created) - new Date(b.created)).reverse()
+
+        setPostState({ ...postState, posts:arr })
+        
+        console.log(arr)
       })
       .catch(err => {
         console.error(err)

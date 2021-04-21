@@ -7,6 +7,8 @@ import {
 import Post from '../../utils/Post';
 
 const Posting = ({ id, title, username, body}) => {
+
+  //const sortProperty = Posting[];
   return (
     <Col>
       <Card>
