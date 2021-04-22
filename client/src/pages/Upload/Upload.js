@@ -102,18 +102,6 @@ const ReactFirebaseFileUpload = () => {
             }
             
 
-            // Post.create({
-            //   title: postState.title,
-            //   body: postState.body,
-            //   link: url,
-            //   tags: tags
-            // })
-
-            //   .then(res => {
-
-            //   window.location = '/'
-            // })
-
           })
       }
 

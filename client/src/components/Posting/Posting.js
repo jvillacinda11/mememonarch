@@ -19,7 +19,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags}) => {
           <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle>
           <CardText>{body}</CardText>
               {tags.length > 0 ? 
-                <CardText>Tags: {tags.map(tag => `|${tag} `)}|</CardText>
+                <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
               : null}
           <CardSubtitle>  
           
@@ -37,7 +37,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags}) => {
               <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle>
               <CardText>{body}</CardText>
               {tags.length > 0 ?
-              <CardText>Tags: {tags.map(tag => `|${tag} `)}|</CardText>
+              <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
                : null}
               <CardSubtitle>
 
