@@ -50,6 +50,7 @@ function Home() {
                   body={post.body}
                   crowns={post.crowns}
                   images= {post.images}
+                  tags= {post.tags}
                 />
               )) : null
           }
