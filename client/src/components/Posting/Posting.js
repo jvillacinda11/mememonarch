@@ -4,7 +4,6 @@ import {
   CardTitle, CardSubtitle, Button,
   Col
 } from 'reactstrap';
-import Post from '../../utils/Post';
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 
