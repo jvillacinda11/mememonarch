@@ -1,4 +1,3 @@
-
 // shweta code
 const { User } = require('../models')
 const passport = require('passport')
@@ -15,14 +14,7 @@ router.post('/users/register', (req, res) => {
 
 router.post('/users/login', (req, res) => {
   User.authenticate()(req.body.username, req.body.password, (err, user) => {
-    if (err) throw err 
-
-    // if (!doc.length) {
-    //   res.render('/users/login', {
-    //     message: "Username or password is incorrect."
-    //   })
-    // }
-    // { console.log(err) }
+    if (err) console.log(err)
     res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null)
   })
 })
@@ -32,11 +24,10 @@ router.get('/users', passport.authenticate('jwt'), (req, res) => {
 })
 
 // router.get('/users/search/:username', (req, res ) =>{
-//   User.find({username : {"$regex": req.params.username, "$options": "i"}}, 'username _id').exec(function (err, data){
-//     if (err){console.log(err)}
-
+//   User.find({ username: { "$regex": req.params.username, "$options": "i" }}, 'username _id').exec(function (err, data){
+//     if (err) console.log(err)
 //       res.json(data)
 //   })
-//   })
+// })
 
 module.exports = router

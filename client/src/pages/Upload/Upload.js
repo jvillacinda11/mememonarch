@@ -4,13 +4,10 @@ import { storage } from '../../firebase';
 import '../../App.css'
 import {
   Button, Form, FormGroup, Label, Input,
-  Container, Row
+  Container, Row, Col
 } from 'reactstrap'
 import DragAndDrop from '../../components/DragAndDrop'
-
-
 import Post from '../../utils/Post'
-
 
 const ReactFirebaseFileUpload = () => {
   const [image, setImage] = useState(null)
@@ -25,89 +22,76 @@ const ReactFirebaseFileUpload = () => {
     posts: []
   })
 
-
   const handleInputChange = ({ target }) => {
     setPostState({ ...postState, [target.name]: target.value })
   }
-
 
   const handleChange = image => {
     setImage(image[0])
   }
 
-
   const handleUpload = () => {
     console.log("image: ", image)
-    if(image) {
-    const uploadTask = storage.ref(`image/${image.name}`).put(image)
-    uploadTask.on("state_changed",
-      snapshot => {
-        const progress = Math.round(
-          (snapshot.byteTransferred / snapshot.totalBytes) * 100
-        )
-        setProgress(progress)
-      },
-      error => {
-        console.log(error)
+    if (image) {
+      const uploadTask = storage.ref(`image/${image.name}`).put(image)
+      uploadTask.on("state_changed",
+        snapshot => {
+          const progress = Math.round(
+            (snapshot.byteTransferred / snapshot.totalBytes) * 100
+          )
+          setProgress(progress)
+        },
+        error => {
+          console.log(error)
 
-      },
-      () => {
-        storage
-          .ref("image")
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            console.log(url)
-            setUrl(url)
-            const tags = []
-            if(postState.tag1 !== '' && postState.tag2 !== ''){
-              tags.push(postState.tag1, postState.tag2)
-              Post.create({
-                title: postState.title,
-                body: postState.body,
-                link: url,
-                tags: tags
-              })
-
-                .then(res => {
-
-                  window.location = '/'
+        },
+        () => {
+          storage
+            .ref("image")
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              console.log(url)
+              setUrl(url)
+              const tags = []
+              if (postState.tag1 !== '' && postState.tag2 !== '') {
+                tags.push(postState.tag1, postState.tag2)
+                Post.create({
+                  title: postState.title,
+                  body: postState.body,
+                  link: url,
+                  tags: tags
                 })
-            }
-            if(postState.tag1 === '' && postState.tag2 !== ''){
-              tags.push(postState.tag2)
-              Post.create({
-                title: postState.title,
-                body: postState.body,
-                link: url,
-                tags: tags
-              })
-
-                .then(res => {
-
-                  window.location = '/'
+                  .then(res => {
+                    window.location = '/'
+                  })
+              }
+              if (postState.tag1 === '' && postState.tag2 !== '') {
+                tags.push(postState.tag2)
+                Post.create({
+                  title: postState.title,
+                  body: postState.body,
+                  link: url,
+                  tags: tags
                 })
-            }
-            if(postState.tag1 === '' && postState.tag2 === ''){
-              Post.create({
-                title: postState.title,
-                body: postState.body,
-                link: url,
-              })
-
-                .then(res => {
-
-                  window.location = '/'
+                  .then(res => {
+                    window.location = '/'
+                  })
+              }
+              if (postState.tag1 === '' && postState.tag2 === '') {
+                Post.create({
+                  title: postState.title,
+                  body: postState.body,
+                  link: url,
                 })
-            }
-            
-
-          })
-      }
-
-    )
-  }
-  else{
+                  .then(res => {
+                    window.location = '/'
+                  })
+              }
+            })
+        }
+      )
+    } else {
       const tags = []
       if (postState.tag1 !== '' && postState.tag2 !== '') {
         tags.push(postState.tag1, postState.tag2)
@@ -163,65 +147,65 @@ const ReactFirebaseFileUpload = () => {
             window.location = '/'
           })
       }
+    }
+    //ends here
   }
-  //ends here
-  }
-
-
 
   return (
-    <>
-      <div>
-        {/* <progress value={progress} max="100" /> */}
-        <h1>Create A Post</h1>
-        <Form inline >
-          <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-            <Label htmlFor='title' className='mr-sm-2'>Title</Label>
-            <Input
-              type='text'
-              name='title'
-              value={postState.title}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-          <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-            <Label htmlFor='body' className='mr-sm-2'>Body</Label>
-            <Input
-              type='textarea'
-              name='body'
-              value={postState.body}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-          <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-            <Label htmlFor='body' className='mr-sm-2'>1st Tag</Label>
-            <Input
-              type='text'
-              name='tag1'
-              value={postState.tag1}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-          <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-            <Label htmlFor='body' className='mr-sm-2'>2nd Tag</Label>
-            <Input
-              type='text'
-              name='tag2'
-              value={postState.tag2}
-              onChange={handleInputChange}
-            />
-          </FormGroup>
-        </Form>
+    <Container>
+      <Row>
+        <Col xs="4">
+          {/* <progress value={progress} max="100" /> */}
+          <h1>Create A Post</h1>
+          <Form >
+            <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+              <Label htmlFor='title' className='mr-sm-2'>Title</Label>
+              <Input
+                type='text'
+                name='title'
+                value={postState.title}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+            <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+              <Label htmlFor='body' className='mr-sm-2'>Body</Label>
+              <Input
+                type='textarea'
+                name='body'
+                value={postState.body}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+            <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+              <Label htmlFor='body' className='mr-sm-2'>1st Tag</Label>
+              <Input
+                type='text'
+                name='tag1'
+                value={postState.tag1}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+            <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+              <Label htmlFor='body' className='mr-sm-2'>2nd Tag</Label>
+              <Input
+                type='text'
+                name='tag2'
+                value={postState.tag2}
+                onChange={handleInputChange}
+              />
+            </FormGroup>
+          </Form>
 
-        {/* <p> Firebase my{User.name} image upload!</p> */}
-        <DragAndDrop upload={handleChange}/>
+          {/* <p> Firebase my{User.name} image upload!</p> */}
+          <DragAndDrop upload={handleChange} />
 
-        <Button onClick={handleUpload}>Create Post</Button>
-        <br />
-        {url}
-        <br />
-      </div>
-    </>
+          <Button onClick={handleUpload}>Create Post</Button>
+          <br />
+          {url}
+          <br />
+        </Col>
+      </Row>
+    </Container>
 
 
   );
