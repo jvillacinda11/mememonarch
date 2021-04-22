@@ -22,7 +22,7 @@ function Home() {
   //shweta added code in use effect for sorting post recent
 
   useEffect(() => {
-    Post.getAll()
+    Post.getAll({})
       .then(({ data: posts }) => {
         let arr = posts.sort((a, b) => new Date(a.created) - new Date(b.created)).reverse()
 
@@ -50,6 +50,7 @@ function Home() {
                   body={post.body}
                   crowns={post.crowns}
                   images= {post.images}
+                  tags= {post.tags}
                 />
               )) : null
           }

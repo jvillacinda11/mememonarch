@@ -11,8 +11,9 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
   Post.create({
     title: req.body.title,
     body: req.body.body,
-    author: req.user._id,
     images: req.body.link,
+    tags: req.body.tags,
+    author: req.user._id,
 
   })
     .then(post => {
