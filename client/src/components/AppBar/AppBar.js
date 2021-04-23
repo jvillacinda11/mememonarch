@@ -92,7 +92,7 @@ const AppBar = () => {
                 </Link>
               </NavItem>
               <NavItem>
-                <NavLink onClick={handleLogOut}>Log Out</NavLink>
+                <NavLink className='link' onClick={handleLogOut}>Log Out</NavLink>
               </NavItem>
               <NavItem>
                 <Link to='/search' className='link'>

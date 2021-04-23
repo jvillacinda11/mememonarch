@@ -1,7 +1,10 @@
 .container {
   padding-top: 30px;
   padding-bottom: 30px;
+}
 
+.reg {
+  width: 50%;
 }
 
 .card-header {
@@ -25,7 +28,12 @@
 }
 
 .hh {
-  margin-left: 40px;
+display: block !important;
+}
+
+.gg {
+  justify-content: space-between;
+  width: 80%;
 }
 
 .searchBox {
@@ -33,6 +41,7 @@
   margin-right: auto;
   width: fit-content
 }
+
 .imgalign {
   margin: 5px;
   border-top: 2px solid rgb(127, 124, 126);
@@ -40,11 +49,17 @@
   border-bottom: 2px solid rgb(127, 124, 126);
   border-right: 2px solid rgb(127, 124, 126);
 }
-.brown{
-    background-color: rgb(184, 174, 174);
+
+.brown {
+  background-color: rgb(184, 174, 174);
 }
-.icon{
+
+.icon {
   width: 1.5rem;
   height: 1.5rem;
+}
 
+.centeritem {
+  margin-left: auto;
+  margin-right: auto;
 }
