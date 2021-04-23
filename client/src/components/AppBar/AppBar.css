@@ -6,6 +6,7 @@
 .link:hover {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 #logo {

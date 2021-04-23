@@ -51,70 +51,13 @@ function Login() {
   }
   return (
     <>
-
-
-
-
-      <Form inline onSubmit={handleRegister}>
-        <h1>Register</h1>
-        <Container className="center brown">
-          <Row xs="4">
-            <Col>
-              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-                <Label htmlFor='name' className='mr-sm-2'>Name</Label>
-                <Input
-                  type='text'
-                  name='name'
-                  value={loginState.name}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-                <Label htmlFor='email' className='mr-sm-2'>Email-Address</Label>
-                <Input
-                  type='email'
-                  name='email'
-                  value={loginState.email}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-                <Label htmlFor='username' className='mr-sm-2'>Username</Label>
-                <Input
-                  type='text'
-                  name='username'
-                  value={loginState.username}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-                <Label htmlFor='password' className='mr-sm-2'>Password</Label>
-                <Input
-                  type='password'
-                  name='password'
-                  value={loginState.password}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col></Row><br />
-          <Button onClick={handleRegister}>Register</Button>
-        </Container>
-      </Form>
-
-
       <Form inline onSubmit={handleLogin}>
-        <h1 className="hh" >Login</h1>
         <Container className="center brown">
+        <h1 className="searchBox">Login</h1>
           <Row>
-            <Col xs="6" sm="4">
-              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-                <Label htmlFor='un' className='mr-sm-2'>Username</Label>
+            <Col xs="3" sm="4">
+              <FormGroup >
+                <Label htmlFor='un'>Username</Label>
                 <Input
                   type='text'
                   name='un'
@@ -123,9 +66,9 @@ function Login() {
                 />
               </FormGroup>
             </Col>
-            <Col xs="6" sm="4">
-              <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-                <Label htmlFor='pw' className='mr-sm-2'>Password</Label>
+            <Col xs="3" sm="4">
+              <FormGroup>
+                <Label htmlFor='pw' >Password</Label>
                 <Input
                   type='password'
                   name='pw'
@@ -134,13 +77,79 @@ function Login() {
                 />
               </FormGroup>
             </Col>
-            <Col sm="4">
-              <Button onClick={handleLogin}>Login</Button>
+            <Col xs="1"sm="2">
+              <Button onClick={handleLogin}>
+              Login</Button>
             </Col>
           </Row>
         </Container>
 
       </Form>
+
+
+
+      
+        <Container className="center brown reg">
+        <h1 className = "searchBox">Register</h1>
+           <Form inline onSubmit={handleRegister}>
+        <div className = "searchBox">
+          
+              
+                <Label htmlFor='name' >Name</Label>
+                <input className ="d-block form-control form-control-lg"
+                  type='text'
+                  name='name'
+                  value={loginState.name}
+                  onChange={handleInputChange}
+                />
+                
+              
+              
+              
+              
+            
+                 <Label htmlFor='email'>Email-Address</Label>
+                
+                <input className ="d-block form-control form-control-lg"
+                  type='email'
+                  name='email'
+                  value={loginState.email}
+                  onChange={handleInputChange}
+                />
+                
+                        
+               <Label htmlFor='username'>Username</Label> 
+               <input className ="d-block form-control form-control-lg"
+                  type='text'
+                  name='username'
+                  value={loginState.username}
+                  onChange={handleInputChange}
+                /> 
+                
+              
+              
+              
+              
+                <Label htmlFor='password'>Password</Label>
+                <input className ="d-block form-control form-control-lg"
+                  type='password'
+                  name='password'
+                  value={loginState.password}
+                  onChange={handleInputChange}
+                />
+                
+              
+              
+          
+          <Button className= "w-100" onClick={handleRegister}>Register</Button>
+          
+            </div>
+           </Form>
+        </Container>
+      
+
+
+
 
 
     </>
