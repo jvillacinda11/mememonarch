@@ -27,7 +27,8 @@ const ReactFirebaseFileUpload = () => {
   }
 
   const handleChange = image => {
-    setImage(image[0])
+    if (image.length === 1) setImage(image[0])
+    else alert("Posts can only hold one image!\nPlease reupload with a single image file!")
   }
 
   const handleUpload = () => {

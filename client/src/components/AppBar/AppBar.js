@@ -103,14 +103,7 @@ const AppBar = () => {
           }
         </Nav>
       </Collapse>     
-       <Form inline onSubmit = {handleFormSubmit}>
-        <FormControl
-        type= 'text'
-        placeholder = 'Search'
-        className = 'mr-auto'
-        />
-        <Button onClick = {handleFormSubmit} variant= 'outline-info'>Search for User</Button>
-      </Form>
+
     </Navbar>
   )
 }
