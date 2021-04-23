@@ -7,13 +7,14 @@ import {
   Container, Row, Col
 } from 'reactstrap'
 import DragAndDrop from '../../components/DragAndDrop'
+import Posting from '../../components/Posting'
 import Post from '../../utils/Post'
 
 const ReactFirebaseFileUpload = () => {
   const [image, setImage] = useState(null)
   const [url, setUrl] = useState("")
   const [progress, setProgress] = useState(0)
-  const [images, setimages] = useState([])
+  const [previewState, setPreviewState] = useState(null)
   const [postState, setPostState] = useState({
     title: '',
     body: '',
@@ -27,8 +28,47 @@ const ReactFirebaseFileUpload = () => {
   }
 
   const handleChange = image => {
-    if (image.length === 1) setImage(image[0])
-    else alert("Posts can only hold one image!\nPlease reupload with a single image file!")
+    if (image.length === 1) {
+      setImage(image[0])
+
+      const uploadTask = storage.ref(`image/${image[0].name}`).put(image[0])
+      uploadTask.on("state_changed",
+        snapshot => {
+          const progress = Math.round(
+            (snapshot.byteTransferred / snapshot.totalBytes) * 100
+          )
+          setProgress(progress)
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          storage
+            .ref("image")
+            .child(image[0].name)
+            .getDownloadURL()
+            .then(url => {
+              console.log(url)
+              setUrl(url)
+            })
+        }
+      )
+    } else alert("Posts can only hold one image!\nPlease reupload with a single image file!")
+  }
+
+  const handlePreview = () => {
+    if (image) {
+      setPreviewState({
+        images: url,
+        id: "",
+        title: postState.title,
+        username: "",
+        body: postState.body,
+        tags: [postState.tag1, postState.tag2]
+      })
+    } else {
+      alert("No image selected!")
+    }
   }
 
   const handleUpload = () => {
@@ -153,9 +193,9 @@ const ReactFirebaseFileUpload = () => {
   }
 
   return (
-    <Container>
+    <Container className="center brown">
       <Row>
-        <Col xs="4">
+        <Col sm={{ size: 4, offset: 1 }}>
           {/* <progress value={progress} max="100" /> */}
           <h1>Create A Post</h1>
           <Form >
@@ -200,10 +240,32 @@ const ReactFirebaseFileUpload = () => {
           {/* <p> Firebase my{User.name} image upload!</p> */}
           <DragAndDrop upload={handleChange} />
 
-          <Button onClick={handleUpload}>Create Post</Button>
-          <br />
-          {url}
-          <br />
+          <Button onClick={handlePreview}>Preview Post</Button>
+
+          
+        </Col>
+        <Col sm={{ size: 4, offset: 2 }}>
+          {
+            previewState ?
+              <>
+                <Row>
+                  <Posting
+                    images={previewState.images}
+                    id=""
+                    title={previewState.title}
+                    username=""
+                    body={previewState.body}
+                    crowns=""
+                    tags={previewState.tags}
+                  /> 
+                </Row>
+                <Row>
+                  <Col>
+                    <Button onClick={handleUpload}>Create Post</Button>
+                  </Col>
+                </Row>
+              </>: null
+          }
         </Col>
       </Row>
     </Container>
