@@ -5,6 +5,8 @@ import {
   Container, Row, Col
 } from 'reactstrap'
 import User from '../../utils/User'
+import Post from '../../utils/Post'
+
 import Posting from '../../components/Posting'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,6 +15,18 @@ function Profile() {
   const [profileState, setProfileState] = useState({
     user: {}
   })
+
+  const deletepost=(id)=>{
+  Post.delete(id)
+    .then(() => {
+      window.location.reload()
+    })
+    .catch(err => {
+      console.error(err)
+      //window.location = '/login'
+    })
+
+  }
 
   useEffect(() => {
     User.profile()
@@ -51,6 +65,7 @@ function Profile() {
                   crowns={post.crowns}
                   images={post.images}
                   tags = {post.tags}
+                  deletepost={deletepost}
                 />
               ))
               : null

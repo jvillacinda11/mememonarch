@@ -44,6 +44,11 @@ router.get('/posts', (req, res) => {
 })
 
 
+router.delete('/posts/:id', (req, res) => {
+  Post.findByIdAndDelete(req.params.id)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
+})
 
 
 
