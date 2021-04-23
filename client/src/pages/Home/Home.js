@@ -51,6 +51,7 @@ function Home() {
                   crowns={post.crowns}
                   images= {post.images}
                   tags= {post.tags}
+                  profilePage={false}
                 />
               )) : null
           }

@@ -25,7 +25,6 @@ function Profile() {
       console.error(err)
       //window.location = '/login'
     })
-
   }
 
   useEffect(() => {
@@ -66,6 +65,7 @@ function Profile() {
                   images={post.images}
                   tags = {post.tags}
                   deletepost={deletepost}
+                  profilePage={true}
                 />
               ))
               : null
