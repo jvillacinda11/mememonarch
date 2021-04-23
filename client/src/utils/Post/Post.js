@@ -10,7 +10,8 @@ const Post = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
-  })
+  }),
+  delete:id => axios.delete(`/api/posts/${id}`)
 }
 
 export default Post
