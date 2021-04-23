@@ -7,7 +7,7 @@ import {
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 
-const Posting = ({ images, id, title, username, body, crowns, tags }) => {
+const Posting = ({ images, id, title, username, body, crowns, tags,deletepost }) => {
   //   /* crowns/karma functionality */                                          
   //   $(".upcrown-post").click(function () {
   //     let query = $(this).closest('article')
@@ -169,6 +169,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags }) => {
                 <Button color='light' light expand='md'><img id="upvote" src={upcrown} alt="pepefoot" class="icon" /></Button> {crowns} <Button color='light' light expand='md'><img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" /></Button>
 
               </CardSubtitle>
+              <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
             </CardBody>
           </Card>
         </Col>
@@ -187,6 +188,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags }) => {
                 <Button color='light' light expand='md'><img id="upvote" src={upcrown} alt="pepefoot" class="icon" /></Button> {crowns} <Button color='light' light expand='md'><img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" /></Button>
 
               </CardSubtitle>
+              <Button color='secondary' onClick={()=>deletepost(id)}>Delete</Button>
             </CardBody>
           </Card>
         </Col>
