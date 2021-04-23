@@ -28,7 +28,7 @@ const ReactFirebaseFileUpload = () => {
   }
 
   const handleChange = image => {
-    if (image.length === 1) {
+    if (image.length === 1 || image.length ===0) {
       setImage(image[0])
 
       const uploadTask = storage.ref(`image/${image[0].name}`).put(image[0])
@@ -57,18 +57,14 @@ const ReactFirebaseFileUpload = () => {
   }
 
   const handlePreview = () => {
-    if (image) {
-      setPreviewState({
-        images: url,
-        id: "",
-        title: postState.title,
-        username: "",
-        body: postState.body,
-        tags: [postState.tag1, postState.tag2]
-      })
-    } else {
-      alert("No image selected!")
-    }
+    setPreviewState({
+      images: url,
+      id: "",
+      title: postState.title,
+      username: "",
+      body: postState.body,
+      tags: [postState.tag1, postState.tag2]
+    })
   }
 
   const handleUpload = () => {
