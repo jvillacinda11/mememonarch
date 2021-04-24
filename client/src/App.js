@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Search from './pages/Search'
 import Upload from './pages/Upload'
+import OtherUserProfile from './pages/OtherUserProfile'
 
 import AppBar from './components/AppBar'
 
@@ -41,6 +42,9 @@ function App() {
             </Route>
             <Route path='/Upload'>
               <Upload />
+            </Route>
+            <Route path= '/OtherUserProfile'>
+              <OtherUserProfile />
             </Route>
           </Switch>
         </div>
