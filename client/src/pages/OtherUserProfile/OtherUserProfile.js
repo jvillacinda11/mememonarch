@@ -11,50 +11,36 @@ import Posting from '../../components/Posting'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Profile() {
+function OtherUserProfile() {
+
   const [profileState, setProfileState] = useState({
     user: {}
   })
 
-  const deletepost=(id)=>{
-  Post.delete(id)
-    .then(() => {
-      window.location.reload()
-    })
-    .catch(err => {
-      console.error(err)
-      //window.location = '/login'
-    })
-  }
-
   useEffect(() => {
-    User.profile()
-      .then(({ data: user }) => {
+    User.otheruserprofile(localStorage.getItem('searchUser'))
+      .then(({data : user}) => {
         console.log(user)
-      setProfileState({ ...profileState, user })
-      console.log(profileState.user)
+        setProfileState({ ...profileState, user: user })
+        console.log(profileState.user.username)
+     
       }
       )
       .catch(err => {
         console.error(err)
-        window.location = '/login'
+        // window.location = '/'
       })
   }, [])
-  return (
+
+
+
+
+  return(
     <>
-      <h1>Your Info</h1>
-      <Card>
-        <CardBody>
-          <CardTitle tag='h5'>Name: {profileState.user.name}</CardTitle>
-          <CardSubtitle tag='h6' className='mb-2 text-muted'>Email: {profileState.user.email}</CardSubtitle>
-          <CardText>Username: {profileState.user.username}</CardText>
-        </CardBody>
-      </Card>
-      <hr />
       <Container>
         <Row>
           <Col>
-            <h1>Your Posts</h1>
+            <h1>{profileState.user.username}'s Posts</h1>
           </Col>
         </Row>
         <Row>
@@ -68,11 +54,8 @@ function Profile() {
                   body={post.body}
                   crowns={post.crowns}
                   images={post.images}
-                  tags = {post.tags}
-                  authid ={profileState.user._id}
-                  deletepost={deletepost}
-                  profilePage={true}
-
+                  tags={post.tags}
+                  otherprofilepage = {true}
                 />
               ))
               : null
@@ -80,7 +63,7 @@ function Profile() {
         </Row>
       </Container>
     </>
-  );
+  )
 }
 
-export default Profile;
+export default OtherUserProfile
