@@ -44,8 +44,13 @@ function Login() {
       password: loginState.pw
     })
       .then(({ data }) => {
+        if (data=== null){
+          alert('not valid password or username')
+        }
+        else{
         localStorage.setItem('user', data)
         window.location = '/'
+        }
       })
       .catch(err => console.error(err))
   }
