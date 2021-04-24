@@ -29,7 +29,12 @@ function Profile() {
 
   useEffect(() => {
     User.profile()
-      .then(({ data: user }) => setProfileState({ ...profileState, user }))
+      .then(({ data: user }) => {
+        console.log(user)
+      setProfileState({ ...profileState, user })
+      console.log(profileState.user)
+      }
+      )
       .catch(err => {
         console.error(err)
         window.location = '/login'
@@ -64,8 +69,10 @@ function Profile() {
                   crowns={post.crowns}
                   images={post.images}
                   tags = {post.tags}
+                  authid ={profileState.user._id}
                   deletepost={deletepost}
                   profilePage={true}
+
                 />
               ))
               : null

@@ -2,11 +2,10 @@ const {User, Post } = require('../models')
 const router = require('express').Router()
 //this is to search users by username
 router.get('/searchUsers/byId/:id', (req, res) => {
-  User.find({_id : req.params.id}).exec(function (err, data){
-    if (err){console.log(err)}
-
-      res.json(data)
-  })
+  User.findOne({_id : req.params.id})
+  .populate('posts')
+  .then(data => res.json(data))
+  .catch(err => console.log(err))
   })
 //Once the users are displayed then they clickable username  will have the data value of _id and that will be used to to look up their posts with the next route
 router.get('/searchPosts/byAuthor/:author', (req, res) => {

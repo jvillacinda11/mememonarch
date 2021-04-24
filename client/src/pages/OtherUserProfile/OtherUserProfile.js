@@ -13,33 +13,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function OtherUserProfile() {
 
-    const [profileState, setProfileState] = useState({
-      user: {}
-    })
+  const [profileState, setProfileState] = useState({
+    user: {}
+  })
 
   useEffect(() => {
-    let profilesearch = 
-    User.otheruserprofile(profilesearch)
-    .then(({ data: user }) => setProfileState({...profileState, user}))
-    .catch(err => {console.log(err)
-    alert('User not found')
-    window.location = '/'
-    })
-  })
+    User.otheruserprofile(localStorage.getItem('searchUser'))
+      .then(({data : user}) => {
+        console.log(user)
+        setProfileState({ ...profileState, user: user })
+        console.log(profileState.user.username)
+     
+      }
+      )
+      .catch(err => {
+        console.error(err)
+        // window.location = '/'
+      })
+  }, [])
+
+
+
 
   return(
     <>
-      <h1>Your Info</h1>
-      <Card>
-        <CardBody>
-          <CardTitle tag='h5'>Name: {profileState.user.name}</CardTitle>
-          <CardText>Username: {profileState.user.username}</CardText>
-        </CardBody>
-      </Card>
       <Container>
         <Row>
           <Col>
-            <h1>{profileState.user.username} Posts</h1>
+            <h1>{profileState.user.username}'s Posts</h1>
           </Col>
         </Row>
         <Row>
@@ -54,6 +55,7 @@ function OtherUserProfile() {
                   crowns={post.crowns}
                   images={post.images}
                   tags={post.tags}
+                  otherprofilepage = {true}
                 />
               ))
               : null

@@ -26,6 +26,7 @@ const AppBar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem('user')
+    localStorage.removeItem('searchUser')
     window.location = '/login'
   }
 

@@ -9,7 +9,7 @@ import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 import './Posting.css'
 
-const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid }) => {
+const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
   //   /* crowns/karma functionality */                                          
   //   $(".upcrown-post").click(function () {
   //     let query = $(this).closest('article')
@@ -153,17 +153,15 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
   //   }
   //   return false;
   // })
- state = {text: ''}
+
    const ProfileSearch = data => {
     //data is the user._id with which we search
-    this.setState({ text: data})
-    this.props.history.push({
-      path : '/OtherUserProfile',
-      state: { text:}
+    localStorage.setItem('searchUser', data)
+    window.location ='/OtherUserProfile'
       
-    })
+    }
 
-  }
+  
   return (
     <>
       { images ?
@@ -172,7 +170,11 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
             <CardImg top width="100%" src={images} alt="Card image cap" />
             <CardBody>
               <CardTitle tag="h5">{title}</CardTitle>
-              <CardSubtitle tag="h6" className="mb-2 text-muted link" onClick= {() => ProfileSearch(authid)}>Posted by {username}</CardSubtitle>
+              {
+                otherprofilepage ? <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle> : <CardSubtitle tag="h6" className="mb-2 text-muted link" onClick={() => ProfileSearch(authid)}>Posted by {username}</CardSubtitle>
+              }
+              
+
               <CardText>{body}</CardText>
               {tags.length > 0 ?
                 <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
