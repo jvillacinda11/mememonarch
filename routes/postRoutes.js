@@ -11,9 +11,8 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
   Post.create({
     title: req.body.title,
     body: req.body.body,
-    images: req.body.link,
-    tags: req.body.tags,
     author: req.user._id,
+    images: req.body.link,
 
   })
     .then(post => {
@@ -45,6 +44,11 @@ router.get('/posts', (req, res) => {
 })
 
 
+router.delete('/posts/:id', (req, res) => {
+  Post.findByIdAndDelete(req.params.id)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
+})
 
 
 
