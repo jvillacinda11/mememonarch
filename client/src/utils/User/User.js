@@ -7,7 +7,8 @@ const User = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
-  })
+  }),
+  otheruserprofile: id => axios.get(`/api/searchUsers/byId/${id}`)
 }
 
 export default User

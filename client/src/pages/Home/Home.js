@@ -47,6 +47,7 @@ function Home() {
                   id={post._id}
                   title={post.title}
                   username={post.author.username}
+                  authid= {post.author._id}
                   body={post.body}
                   crowns={post.crowns}
                   images= {post.images}

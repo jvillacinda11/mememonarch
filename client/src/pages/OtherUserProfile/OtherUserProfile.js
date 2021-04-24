@@ -11,45 +11,35 @@ import Posting from '../../components/Posting'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Profile() {
-  const [profileState, setProfileState] = useState({
-    user: {}
-  })
+function OtherUserProfile() {
 
-  const deletepost=(id)=>{
-  Post.delete(id)
-    .then(() => {
-      window.location.reload()
+    const [profileState, setProfileState] = useState({
+      user: {}
     })
-    .catch(err => {
-      console.error(err)
-      //window.location = '/login'
-    })
-  }
 
   useEffect(() => {
-    User.profile()
-      .then(({ data: user }) => setProfileState({ ...profileState, user }))
-      .catch(err => {
-        console.error(err)
-        window.location = '/login'
-      })
-  }, [])
-  return (
+    let profilesearch = 
+    User.otheruserprofile(profilesearch)
+    .then(({ data: user }) => setProfileState({...profileState, user}))
+    .catch(err => {console.log(err)
+    alert('User not found')
+    window.location = '/'
+    })
+  })
+
+  return(
     <>
       <h1>Your Info</h1>
       <Card>
         <CardBody>
           <CardTitle tag='h5'>Name: {profileState.user.name}</CardTitle>
-          <CardSubtitle tag='h6' className='mb-2 text-muted'>Email: {profileState.user.email}</CardSubtitle>
           <CardText>Username: {profileState.user.username}</CardText>
         </CardBody>
       </Card>
-      <hr />
       <Container>
         <Row>
           <Col>
-            <h1>Your Posts</h1>
+            <h1>{profileState.user.username} Posts</h1>
           </Col>
         </Row>
         <Row>
@@ -63,9 +53,7 @@ function Profile() {
                   body={post.body}
                   crowns={post.crowns}
                   images={post.images}
-                  tags = {post.tags}
-                  deletepost={deletepost}
-                  profilePage={true}
+                  tags={post.tags}
                 />
               ))
               : null
@@ -73,7 +61,7 @@ function Profile() {
         </Row>
       </Container>
     </>
-  );
+  )
 }
 
-export default Profile;
+export default OtherUserProfile

@@ -1,8 +1,8 @@
 const {User, Post } = require('../models')
 const router = require('express').Router()
 //this is to search users by username
-router.get('/searchUsers/byUsername/:username', (req, res) => {
-  User.find({username : {"$regex": req.params.username, "$options": "i"}}, 'username _id').exec(function (err, data){
+router.get('/searchUsers/byId/:id', (req, res) => {
+  User.find({_id : req.params.id}).exec(function (err, data){
     if (err){console.log(err)}
 
       res.json(data)
