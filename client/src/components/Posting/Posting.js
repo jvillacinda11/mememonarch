@@ -20,18 +20,18 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
       
     }
     
-  const Upvote = require('react-upvote');
-  <Upvote
-    voteStatus={user.votes[postData.id] || 0}
-    upvoteContent={<img id="upvote" src={upcrown} alt="pepefoot" class="icon" />}
-    downvoteContent={<img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />}
-    afterContent={<span className="upvote-count">{postData.upvotes}</span>}
-    shouldAllow={() => user.isLoggedIn}
-    onDisallowed={() => this.errorMessage('You have to log in!')}
-    onUpvote={() => this.upvotePost(postData.id)}
-    onDownvote={() => this.downvotePost(postData.id)}
-    onRemoveVote={() => this.removeVote(postData.id)}
-  />
+  // const Upvote = require('react-upvote');
+  // <Upvote
+  //   voteStatus={user.votes[postData.id] || 0}
+  //   upvoteContent={<img id="upvote" src={upcrown} alt="pepefoot" class="icon" />}
+  //   downvoteContent={<img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />}
+  //   afterContent={<span className="upvote-count">{postData.upvotes}</span>}
+  //   shouldAllow={() => user.isLoggedIn}
+  //   onDisallowed={() => this.errorMessage('You have to log in!')}
+  //   onUpvote={() => this.upvotePost(postData.id)}
+  //   onDownvote={() => this.downvotePost(postData.id)}
+  //   onRemoveVote={() => this.removeVote(postData.id)}
+  // />
 
   
   return (
@@ -53,12 +53,16 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                 : null}
               <CardSubtitle>
 
-                <Button color='light' light expand='md'><img id="upvote" src={upcrown} alt="pepefoot" class="icon" /></Button> {crowns} <Button color='light' light expand='md'><img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" /></Button>
+
 
               </CardSubtitle>
               {
                 profilePage ?
-                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button> : null
+                <>
+                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button> 
+                  </>
+                  :
+                null
               }
             </CardBody>
           </Card>
@@ -75,12 +79,15 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                 : null}
               <CardSubtitle>
 
-                <Button color='light' light expand='md'><img id="upvote" src={upcrown} alt="pepefoot" class="icon" /></Button> {crowns} <Button color='light' light expand='md'><img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" /></Button>
 
               </CardSubtitle>
               {
                 profilePage ?
-                  <Button color='secondary' onClick={()=>deletepost(id)}>Delete</Button> : null
+                  <>
+                    <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
+                  </>
+                  :
+                null
               }
             </CardBody>
           </Card>
