@@ -74,7 +74,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               <CardTitle tag="h5">{title}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted link" onClick={() => ProfileSearch(authid)}>Posted by {username}</CardSubtitle>
               <CardText>{body}</CardText>
-              {tags.length > 0 ?
+              {tags ?
                 <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
                 : null}
               <CardSubtitle>
