@@ -96,7 +96,7 @@ const ReactFirebaseFileUpload = () => {
                 link: url,
                 tags
               })
-                // .then(res => window.location = '/')
+                .then(res => window.location = '/')
               // if (postState.tag1 !== '' && postState.tag2 !== '') {
               //   tags.push(postState.tag1, postState.tag2)
               //   Post.create({
@@ -142,7 +142,7 @@ const ReactFirebaseFileUpload = () => {
         tags: previewState.tags
       })
         .then(res => {
-          // window.location = '/'
+          window.location = '/'
         })
       // if (postState.tag1 !== '' && postState.tag2 !== '') {
       //   tags.push(postState.tag1, postState.tag2)
