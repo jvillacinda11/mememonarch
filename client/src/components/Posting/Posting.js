@@ -20,20 +20,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
       
     }
     
-  const Upvote = require('react-upvote');
-  <Upvote
-    voteStatus={user.votes[postData.id] || 0}
-    upvoteContent={<img id="upvote" src={upcrown} alt="pepefoot" class="icon" />}
-    downvoteContent={<img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />}
-    afterContent={<span className="upvote-count">{postData.upvotes}</span>}
-    shouldAllow={() => user.isLoggedIn}
-    onDisallowed={() => this.errorMessage('You have to log in!')}
-    onUpvote={() => this.upvotePost(postData.id)}
-    onDownvote={() => this.downvotePost(postData.id)}
-    onRemoveVote={() => this.removeVote(postData.id)}
-  />
-
-  
   return (
     <>
       { images ?
@@ -86,6 +72,19 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
           </Card>
         </Col>
       }
+
+  {/* <Upvote
+    voteStatus={user.votes[postData.id] || 0}
+    upvoteContent={<img id="upvote" src={upcrown} alt="pepefoot" class="icon" />}
+    downvoteContent={<img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />}
+    afterContent={<span className="upvote-count">{postData.upvotes}</span>}
+    shouldAllow={() => user.isLoggedIn}
+    onDisallowed={() => this.errorMessage('You have to log in!')}
+    onUpvote={() => this.upvotePost(postData.id)}
+    onDownvote={() => this.downvotePost(postData.id)}
+    onRemoveVote={() => this.removeVote(postData.id)}
+    /> */}
+
     </>
   )
 }
