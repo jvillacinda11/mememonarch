@@ -8,151 +8,10 @@ import {
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 import './Posting.css'
+import Upvote from 'react-upvote';
 
 const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
-  //   /* crowns/karma functionality */                                          
-  //   $(".upcrown-post").click(function () {
-  //     let query = $(this).closest('article')
-  //     let ref = query.data('ref')
 
-  //     let crowns = query.find('.post-crowns')
-  //     let downcrown = query.find(".downcrown-post")
-  //     let post_user = query.find('.post-user').text()
-  //     let counter;
-
-  //     // if upvote is already toggled and user presses it again, 
-  //     // toggle off the upvote button and decrement vote.
-  //     if ($(this).hasClass("up-enabled")) {
-  //       counter = crowns.text();
-  //       crowns.text(--counter);
-  //       $(this).removeClass("up-enabled");
-
-  //       $.ajax({
-  //         type: "put",
-  //         url: `/crown/post/${ref}`,
-  //         data: {
-  //           crown: counter,
-  //           state: "neutral",
-  //           action: "decrement",
-  //           user: post_user
-  //         },
-  //         success: function (res) { }
-  //       });
-  //       return false;
-  //     }
-
-  //     // if downvote is already toggled while upvote is pressed
-  //     // toggle off downvote and increment vote
-  //     if (downcrown.hasClass('down-enabled')) {
-  //       downcrown.removeClass("down-enabled");
-  //       counter = crowns.text();
-  //       crowns.text(++counter);
-
-  //       $.ajax({
-  //         type: "put",
-  //         data: {
-  //           crown: counter,
-  //           state: "neutral",
-  //           action: "increment",
-  //           user: post_user
-  //         },
-  //         url: `/crown/post/${ref}`,
-  //         success: function (res) { }
-  //       });
-  //     }
-
-  //     // if upvote isnt toggled while upvote is pressed,
-  //     // toggle upvote and increment vote.
-  //     else if (!$(this).hasClass("up-enabled")) {
-  //       counter = crowns.text();
-  //       crowns.text(++counter);
-  //       $(this).addClass("up-enabled");
-
-  //       $.ajax({
-  //         type: "put",
-  //         data: {
-  //           crowns: counter,
-  //           state: "up",
-  //           action: "increment",
-  //           user: post_user
-  //         },
-  //         url: `/crown/post/${ref}`,
-  //         success: function (res) { }
-  //       });
-  //     }
-  //     return false;
-  //   })
-
-  // (".downcrown-post").click(function () {
-  //   let query = $(this).closest('article')
-  //   let ref = query.data('ref')
-
-  //   let crowns = query.find('.post-crowns')
-  //   let upcrown = query.find(".upcrown-post")
-  //   let post_user = query.find('.post-user').text()
-  //   let counter;
-
-  //   // if downvote is already toggled and user presses it again, 
-  //   // toggle off the downvote button and increment vote.
-  //   if ($(this).hasClass("down-enabled")) {
-  //     counter = crowns.text();
-  //     crowns.text(++counter);
-  //     $(this).removeClass("down-enabled");
-
-  //     $.ajax({
-  //       type: "put",
-  //       data: {
-  //         crown: counter,
-  //         state: "neutral",
-  //         action: "increment",
-  //         user: post_user
-  //       },
-  //       url: `/crown/post/${ref}`,
-  //       success: function (res) { }
-  //     });
-  //     return false;
-  //   }
-
-  //   // if upvote is already toggled while downvote is pressed
-  //   // toggle off upvote and decrement vote
-  //   if (upcrown.hasClass('up-enabled')) {
-  //     upcrown.removeClass("up-enabled");
-  //     counter = crowns.text();
-  //     crowns.text(--counter);
-
-  //     $.ajax({
-  //       type: "put",
-  //       data: {
-  //         crown: counter,
-  //         state: "neutral",
-  //         action: "decrement",
-  //         user: post_user
-  //       },
-  //       url: `/crown/post/${ref}`,
-  //       success: function (res) { }
-  //     });
-
-  //     // if downvote isnt toggled while downvote is pressed,
-  //     // toggle downvote and decrement vote.
-  //   } else if (!$(this).hasClass("down-enabled")) {
-  //     counter = crowns.text();
-  //     crowns.text(--counter);
-  //     $(this).addClass("down-enabled");
-
-  //     $.ajax({
-  //       type: "put",
-  //       data: {
-  //         crown: counter,
-  //         state: "down",
-  //         action: "decrement",
-  //         user: post_user
-  //       },
-  //       url: `/crown/post/${ref}`,
-  //       success: function (res) { }
-  //     });
-  //   }
-  //   return false;
-  // })
 
    const ProfileSearch = data => {
     //data is the user._id with which we search
@@ -160,6 +19,19 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
     window.location ='/OtherUserProfile'
       
     }
+    
+  // const Upvote = require('react-upvote');
+  // <Upvote
+  //   voteStatus={user.votes[postData.id] || 0}
+  //   upvoteContent={<img id="upvote" src={upcrown} alt="pepefoot" class="icon" />}
+  //   downvoteContent={<img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />}
+  //   afterContent={<span className="upvote-count">{postData.upvotes}</span>}
+  //   shouldAllow={() => user.isLoggedIn}
+  //   onDisallowed={() => this.errorMessage('You have to log in!')}
+  //   onUpvote={() => this.upvotePost(postData.id)}
+  //   onDownvote={() => this.downvotePost(postData.id)}
+  //   onRemoveVote={() => this.removeVote(postData.id)}
+  // />
 
   
   return (
@@ -181,12 +53,16 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                 : null}
               <CardSubtitle>
 
-                <Button color='light' light expand='md'><img id="upvote" src={upcrown} alt="pepefoot" class="icon" /></Button> {crowns} <Button color='light' light expand='md'><img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" /></Button>
+
 
               </CardSubtitle>
               {
                 profilePage ?
-                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button> : null
+                <>
+                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button> 
+                  </>
+                  :
+                null
               }
             </CardBody>
           </Card>
@@ -203,12 +79,15 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                 : null}
               <CardSubtitle>
 
-                <Button color='light' light expand='md'><img id="upvote" src={upcrown} alt="pepefoot" class="icon" /></Button> {crowns} <Button color='light' light expand='md'><img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" /></Button>
 
               </CardSubtitle>
               {
                 profilePage ?
-                  <Button color='secondary' onClick={()=>deletepost(id)}>Delete</Button> : null
+                  <>
+                    <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
+                  </>
+                  :
+                null
               }
             </CardBody>
           </Card>
