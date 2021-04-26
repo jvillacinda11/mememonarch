@@ -13,6 +13,7 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
     body: req.body.body,
     author: req.user._id,
     images: req.body.link,
+    tags: req.body.tags
 
   })
     .then(post => {
