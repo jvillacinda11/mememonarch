@@ -49,7 +49,7 @@ function Home() {
                   username={post.author.username}
                   authid= {post.author._id}
                   body={post.body}
-                  crowns={post.voteStatus}
+                  crowns={post.crowns}
                   images= {post.images}
                   tags= {post.tags}
                   profilePage={false}
