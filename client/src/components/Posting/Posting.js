@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { PromiseProvider } from 'mongoose';
 import React from 'react';
 import {
@@ -9,17 +10,24 @@ import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 import './Posting.css'
 import Upvote from 'react-upvote';
+import Post from '../../utils/Post'
 
 const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
 
 
-   const ProfileSearch = data => {
+  const [voteState, setVoteState] = useState({
+    upvoteActive: false,
+    downvoteActive: false
+  })
+
+
+  const ProfileSearch = data => {
     //data is the user._id with which we search
     localStorage.setItem('searchUser', data)
-    window.location ='/OtherUserProfile'
-      
-    }
-    
+    window.location = '/OtherUserProfile'
+
+  }
+
   // const Upvote = require('react-upvote');
   // <Upvote
   //   voteStatus={user.votes[postData.id] || 0}
@@ -32,8 +40,16 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
   //   onDownvote={() => this.downvotePost(postData.id)}
   //   onRemoveVote={() => this.removeVote(postData.id)}
   // />
+  const handleupvote = () => {
+    let vote = crowns + 1
+    Post.vote(id, vote)
 
-  
+  }
+  const handledownvote = () => {
+    let vote = crowns - 1
+    Post.vote(id, vote)
+  }
+
   return (
     <>
       { images ?
@@ -45,7 +61,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               {
                 otherprofilepage ? <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle> : <CardSubtitle tag="h6" className="mb-2 text-muted link" onClick={() => ProfileSearch(authid)}>Posted by {username}</CardSubtitle>
               }
-              
+
 
               <CardText>{body}</CardText>
               {tags.length > 0 ?
@@ -58,11 +74,23 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               </CardSubtitle>
               {
                 profilePage ?
-                <>
-                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button> 
+                  <>
+                    <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
                   </>
                   :
-                null
+                  <>
+                    <CardSubtitle>
+
+                      <Button color='light' light expand='md' onClick={handleupvote}>
+                        <img id="upvote" src={upcrown} alt="pepefoot" class="icon" />
+                      </Button>
+                      {crowns}
+                      <Button color='light' light expand='md' onClick={handledownvote}>
+                        <img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />
+                      </Button>
+
+                    </CardSubtitle>
+                  </>
               }
             </CardBody>
           </Card>
@@ -74,7 +102,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               <CardTitle tag="h5">{title}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted link" onClick={() => ProfileSearch(authid)}>Posted by {username}</CardSubtitle>
               <CardText>{body}</CardText>
-              {tags.length > 0 ?
+              {tags ?
                 <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
                 : null}
               <CardSubtitle>
@@ -87,7 +115,19 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                     <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
                   </>
                   :
-                null
+                  <>
+                    <CardSubtitle>
+
+                      <Button color='light' light expand='md' onClick={handleupvote}>
+                        <img id="upvote" src={upcrown} alt="pepefoot" class="icon" />
+                      </Button>
+                      {crowns}
+                      <Button color='light' light expand='md' onClick={handledownvote}>
+                        <img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />
+                      </Button>
+
+                    </CardSubtitle>
+                  </>
               }
             </CardBody>
           </Card>

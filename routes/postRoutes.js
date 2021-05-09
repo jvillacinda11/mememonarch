@@ -14,7 +14,6 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
     author: req.user._id,
     images: req.body.link,
     tags: req.body.tags
-
   })
     .then(post => {
       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
@@ -51,6 +50,14 @@ router.delete('/posts/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.put('/posts/vote/:id', passport.authenticate('jwt'), (req, res) => {
+  Post.findByIdAndUpdate(req.params.id, { crowns: req.body.vote })
+    .then(() => {
+      res.sendStatus(200)
+
+    })
+    .catch(err => console.log(err))
+})
 
 
 module.exports = router
