@@ -175,7 +175,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
           </Card>
         </Col>
         :
-        <Col>
+        <Col sm="12" md="4">
           <Card>
             <CardBody>
               <CardTitle tag="h5">{title}</CardTitle>
