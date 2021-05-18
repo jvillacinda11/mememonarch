@@ -1,5 +1,6 @@
 const {User, Post } = require('../models')
 const router = require('express').Router()
+const passport = require('passport')
 //this is to search users by username
 router.get('/searchUsers/byId/:id', (req, res) => {
   User.findOne({_id : req.params.id})
@@ -29,6 +30,14 @@ router.get('/searchPosts/byTitle/:title', (req, res)=> {
   Post.find({title: {"$regex": req.params.title, "$options": "i"}})
   .populate('author')
   .then(posts =>  res.json(posts))
+  .catch(err => console.log(err))
+})
+
+router.get('/searchUsers/likedHistory/:postid', passport.authenticate('jwt'), (req, res) =>{
+  User.findOne({_id: req.user._id}).select({likedHistory: {$elemMatch: {postId: req.params.postid}}})
+  .then(data => {
+    res.json(data)
+  })
   .catch(err => console.log(err))
 })
 

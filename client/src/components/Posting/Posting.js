@@ -41,13 +41,92 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
   //   onRemoveVote={() => this.removeVote(postData.id)}
   // />
   const handleupvote = () => {
-    let vote = crowns + 1
-    Post.vote(id, vote)
+    //Post.checkVote checks whether the User has already interacted with the post
+    Post.checkVote(id)
+    .then(({data}) => {
+      //this conditional is for liking posts that have already been interacted with
+      if(data.likedHistory.length > 0){
+      console.log(data)
+      let up = data.likedHistory[0].upvoteActive
+      let down = data.likedHistory[0].downvoteActive
+      let voteId = data.likedHistory[0]._id
+      //if you have previously downvoted
+      if(down){
+
+        let vote = crowns + 2
+        let upvoteUpdate = true
+        let downvoteUpdate = false
+        Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId )
+      }
+      if(up){
+        let vote = crowns - 1
+        let upvoteUpdate = false
+        let downvoteUpdate = false
+        Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+      }
+      if(up === false && down === false){
+        let vote = crowns + 1
+        let upvoteUpdate = true
+        let downvoteUpdate = false
+        Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+      }
+      }
+      //this is for liking posts for the first time
+      if(data.likedHistory.length === 0){
+      let vote = crowns + 1
+      let upvoteUpdate = true
+      let downvoteUpdate = false
+      Post.vote(id, vote, upvoteUpdate, downvoteUpdate)
+
+      }
+    })
+    .catch(err => console.log(err))
+
+
 
   }
   const handledownvote = () => {
-    let vote = crowns - 1
-    Post.vote(id, vote)
+
+    Post.checkVote(id)
+      .then(({ data }) => {
+        //this conditional is for liking posts that have already been interacted with
+        if (data.likedHistory.length > 0) {
+          console.log(data)
+          let up = data.likedHistory[0].upvoteActive
+          let down = data.likedHistory[0].downvoteActive
+          let voteId = data.likedHistory[0]._id
+          //if you have previously downvoted
+          if (up) {
+
+            let vote = crowns - 2
+            let upvoteUpdate = false
+            let downvoteUpdate = true
+            Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+          }
+          if(down){
+            let vote = crowns + 1 
+            let upvoteUpdate = false
+            let downvoteUpdate = false
+            Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+          }
+          if(down ===false && up ===false){
+            let vote = crowns - 1
+            let upvoteUpdate = false
+            let downvoteUpdate = true
+            Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+          }
+
+        }
+        //this is for liking posts for the first time
+        if (data.likedHistory.length === 0) {
+          let vote = crowns - 1
+          let upvoteUpdate = false
+          let downvoteUpdate = true
+          Post.vote(id, vote, upvoteUpdate, downvoteUpdate)
+
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   return (
