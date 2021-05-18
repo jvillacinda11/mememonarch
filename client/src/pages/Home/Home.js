@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
   Button, Form, FormGroup, Label, Input,
-  Container, Row
+  Container, Row, Col
 } from 'reactstrap'
 import Post from '../../utils/Post'
 import Posting from '../../components/Posting'
@@ -40,6 +40,7 @@ function Home() {
     <>
       <Container>
         <Row>
+          {/* <Col> */}
           {
             postState.posts.length > 0
               ? postState.posts.map(post => (
@@ -49,7 +50,7 @@ function Home() {
                   username={post.author.username}
                   authid= {post.author._id}
                   body={post.body}
-                  crowns={post.voteStatus}
+                  crowns={post.crowns}
                   images= {post.images}
                   tags= {post.tags}
                   profilePage={false}
@@ -57,6 +58,7 @@ function Home() {
                 />
               )) : null
           }
+          {/* </Col> */}
         </Row>
       </Container>
     </>

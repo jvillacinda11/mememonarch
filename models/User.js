@@ -7,6 +7,11 @@ const User = new Schema({
   posts: [{
     type: Schema.Types.ObjectId,
     ref: 'Post'
+  }],
+  likedHistory: [{
+    upvoteActive: Boolean,
+    downvoteActive: Boolean,
+    postId: String
   }]
 })
 

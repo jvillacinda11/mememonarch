@@ -50,6 +50,37 @@ router.delete('/posts/:id', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.put('/posts/vote/:id', passport.authenticate('jwt'), (req, res) => {
+  Post.findByIdAndUpdate(req.params.id, { crowns: req.body.vote })
+    .then(() => {
+      res.sendStatus(200)
+      User.findByIdAndUpdate(req.user._id, {$push : {
+        likedHistory: {
+          upvoteActive: req.body.upvoteUpdate,
+          downvoteActive: req.body.downvoteUpdate,
+          postId: req.params.id
+        }
+      }
+    })
+      .then(liked => res.json(liked))
+      .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
+})
 
+router.put('/posts/repeatVote/:id', passport.authenticate('jwt'), (req, res) => {
+  Post.findByIdAndUpdate(req.params.id, { crowns: req.body.vote })
+  .then(() => {
+    User.update({'likedHistory._id' : req.body.vId}, {$set : {
+      'likedHistory.$.upvoteActive': req.body.upvoteUpdate,
+      'likedHistory.$.downvoteActive' : req.body.downvoteUpdate
+    }})
+    .then(() => {
+      res.sendStatus(200)
+    })
+    .catch(err => console.log(err))
+  })
+  .catch(err => console.log(err))
+})
 
 module.exports = router
