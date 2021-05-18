@@ -132,7 +132,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
   return (
     <>
       { images ?
-        <Col>
+        <Col sm= "12" md = "4">
           <Card>
             <CardImg top width="100%" src={images} alt="Card image cap" />
             <CardBody>
