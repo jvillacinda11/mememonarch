@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { PromiseProvider } from 'mongoose';
 import React from 'react';
 import {
@@ -15,19 +15,19 @@ import Post from '../../utils/Post'
 const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
 
 
-  const [voteState, setVoteState ] = useState({
+  const [voteState, setVoteState] = useState({
     upvoteActive: false,
     downvoteActive: false
   })
 
 
-   const ProfileSearch = data => {
+  const ProfileSearch = data => {
     //data is the user._id with which we search
     localStorage.setItem('searchUser', data)
-    window.location ='/OtherUserProfile'
-      
-    }
-    
+    window.location = '/OtherUserProfile'
+
+  }
+
   // const Upvote = require('react-upvote');
   // <Upvote
   //   voteStatus={user.votes[postData.id] || 0}
@@ -40,20 +40,99 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
   //   onDownvote={() => this.downvotePost(postData.id)}
   //   onRemoveVote={() => this.removeVote(postData.id)}
   // />
- const handleupvote = () => {
-  let vote = crowns+1
-  Post.vote(id, vote)
+  const handleupvote = () => {
+    //Post.checkVote checks whether the User has already interacted with the post
+    Post.checkVote(id)
+    .then(({data}) => {
+      //this conditional is for liking posts that have already been interacted with
+      if(data.likedHistory.length > 0){
+      console.log(data)
+      let up = data.likedHistory[0].upvoteActive
+      let down = data.likedHistory[0].downvoteActive
+      let voteId = data.likedHistory[0]._id
+      //if you have previously downvoted
+      if(down){
 
- }
- const handledownvote = () => {
-   let vote = crowns-1
-   Post.vote(id, vote)
- }
+        let vote = crowns + 2
+        let upvoteUpdate = true
+        let downvoteUpdate = false
+        Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId )
+      }
+      if(up){
+        let vote = crowns - 1
+        let upvoteUpdate = false
+        let downvoteUpdate = false
+        Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+      }
+      if(up === false && down === false){
+        let vote = crowns + 1
+        let upvoteUpdate = true
+        let downvoteUpdate = false
+        Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+      }
+      }
+      //this is for liking posts for the first time
+      if(data.likedHistory.length === 0){
+      let vote = crowns + 1
+      let upvoteUpdate = true
+      let downvoteUpdate = false
+      Post.vote(id, vote, upvoteUpdate, downvoteUpdate)
+
+      }
+    })
+    .catch(err => console.log(err))
+
+
+
+  }
+  const handledownvote = () => {
+
+    Post.checkVote(id)
+      .then(({ data }) => {
+        //this conditional is for liking posts that have already been interacted with
+        if (data.likedHistory.length > 0) {
+          console.log(data)
+          let up = data.likedHistory[0].upvoteActive
+          let down = data.likedHistory[0].downvoteActive
+          let voteId = data.likedHistory[0]._id
+          //if you have previously downvoted
+          if (up) {
+
+            let vote = crowns - 2
+            let upvoteUpdate = false
+            let downvoteUpdate = true
+            Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+          }
+          if(down){
+            let vote = crowns + 1 
+            let upvoteUpdate = false
+            let downvoteUpdate = false
+            Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+          }
+          if(down ===false && up ===false){
+            let vote = crowns - 1
+            let upvoteUpdate = false
+            let downvoteUpdate = true
+            Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+          }
+
+        }
+        //this is for liking posts for the first time
+        if (data.likedHistory.length === 0) {
+          let vote = crowns - 1
+          let upvoteUpdate = false
+          let downvoteUpdate = true
+          Post.vote(id, vote, upvoteUpdate, downvoteUpdate)
+
+        }
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <>
       { images ?
-        <Col>
+        <Col sm= "12" md = "4">
           <Card>
             <CardImg top width="100%" src={images} alt="Card image cap" />
             <CardBody>
@@ -61,7 +140,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               {
                 otherprofilepage ? <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle> : <CardSubtitle tag="h6" className="mb-2 text-muted link" onClick={() => ProfileSearch(authid)}>Posted by {username}</CardSubtitle>
               }
-              
+
 
               <CardText>{body}</CardText>
               {tags.length > 0 ?
@@ -74,29 +153,29 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               </CardSubtitle>
               {
                 profilePage ?
-                <>
-                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button> 
+                  <>
+                    <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
                   </>
                   :
-                <>
+                  <>
                     <CardSubtitle>
 
-                     <Button color='light' light expand='md' onClick = {handleupvote}>
-                      <img id="upvote" src={upcrown} alt="pepefoot" class="icon" />
+                      <Button color='light' light expand='md' onClick={handleupvote}>
+                        <img id="upvote" src={upcrown} alt="pepefoot" class="icon" />
                       </Button>
-                      {crowns} 
-                    <Button color='light' light expand='md' onClick = {handledownvote}>
-                      <img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />
-                    </Button>
+                      {crowns}
+                      <Button color='light' light expand='md' onClick={handledownvote}>
+                        <img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />
+                      </Button>
 
                     </CardSubtitle>
-                </>
+                  </>
               }
             </CardBody>
           </Card>
         </Col>
         :
-        <Col>
+        <Col sm="12" md="4">
           <Card>
             <CardBody>
               <CardTitle tag="h5">{title}</CardTitle>
