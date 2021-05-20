@@ -16,8 +16,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
 
   const [voteState, setVoteState] = useState({
-    upvoteActive: false,
-    downvoteActive: false
+    currentCrowns : crowns
   })
 
 
@@ -108,12 +107,14 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
             let upvoteUpdate = false
             let downvoteUpdate = false
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+           
           }
           if(down ===false && up ===false){
             let vote = crowns - 1
             let upvoteUpdate = false
             let downvoteUpdate = true
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+
           }
 
         }

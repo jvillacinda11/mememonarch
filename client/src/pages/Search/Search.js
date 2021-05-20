@@ -45,6 +45,7 @@ function Search() {
 
   const handleSearchTitle = event =>{
     event.preventDefault()
+    if(titleState.title){
     axios.get(`/api/searchPosts/byTitle/${titleState.title}`)
     //change the content after then
       .then(({data : titlePosts}) => {
@@ -53,10 +54,12 @@ function Search() {
         setResultsState({...titleState, results: titlePosts})
       })
       .catch(err => console.log(err))
+    }
   }
 
   const handleSearchTag = event =>{
     event.preventDefault()
+    if(tagState.tag){
     axios.get(`/api/searchPosts/byTag/${tagState.tag}`)
     //change the content after "then"
     .then(({data: tagPosts}) => {
@@ -66,6 +69,7 @@ function Search() {
       // console.log(tagState.tagPosts)
     })
     .catch(err => console.log(err))
+    }
   }
 
   return(
