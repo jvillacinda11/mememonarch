@@ -145,7 +145,7 @@ function Login() {
                 
               
               
-          
+          <br />
           <Button className= "w-100" onClick={handleRegister}>Register</Button>
           
             </div>

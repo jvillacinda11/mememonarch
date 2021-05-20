@@ -12,7 +12,6 @@ import {
   InputGroupAddon,
   Input
 } from 'reactstrap'
-import { Button, Form, FormControl} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import User from '../../utils/User'
 import './AppBar.css'
