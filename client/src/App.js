@@ -18,15 +18,10 @@ import AppBar from './components/AppBar'
 function App() {
   return (
    <>
-   {/* <h1>App Page</h1> */}
+
       <Router>
         <div>
           <AppBar/>
-          {/* <div>
-            <Link to='/'>home</Link>
-            <Link to='/login'>login</Link>
-            <Link to='/profile'>profile</Link>
-          </div> */}
           <Switch>
             <Route exact path='/'>
               <Home />
