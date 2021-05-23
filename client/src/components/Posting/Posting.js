@@ -9,7 +9,6 @@ import {
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 import './Posting.css'
-import Upvote from 'react-upvote';
 import Post from '../../utils/Post'
 
 const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
@@ -24,7 +23,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
     //data is the user._id with which we search
     localStorage.setItem('searchUser', data)
     window.location = '/OtherUserProfile'
-
   }
 
   // const Upvote = require('react-upvote');
@@ -133,7 +131,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
   return (
     <>
       { images ?
-        <Col sm= "12" md = "4">
+        // <Col>
           <Card>
             <CardImg top width="100%" src={images} alt="Card image cap" />
             <CardBody>
@@ -174,9 +172,9 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               }
             </CardBody>
           </Card>
-        </Col>
+        // </Col>
         :
-        <Col sm="12" md="4">
+        // <Col>
           <Card>
             <CardBody>
               <CardTitle tag="h5">{title}</CardTitle>
@@ -211,7 +209,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               }
             </CardBody>
           </Card>
-        </Col>
+        // </Col>
       }
     </>
   )

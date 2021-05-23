@@ -61,19 +61,20 @@ function Profile() {
           {
             profileState.user.posts
               ? profileState.user.posts.map(post => (
-                <Posting
-                  id={post._id}
-                  title={post.title}
-                  username={profileState.user.username}
-                  body={post.body}
-                  crowns={post.crowns}
-                  images={post.images}
-                  tags = {post.tags}
-                  authid ={profileState.user._id}
-                  deletepost={deletepost}
-                  profilePage={true}
-
-                />
+                <Col md="4">
+                  <Posting
+                    id={post._id}
+                    title={post.title}
+                    username={profileState.user.username}
+                    body={post.body}
+                    crowns={post.crowns}
+                    images={post.images}
+                    tags = {post.tags}
+                    authid ={profileState.user._id}
+                    deletepost={deletepost}
+                    profilePage={true}
+                  />
+                </Col>
               ))
               : null
           }

@@ -259,15 +259,17 @@ const ReactFirebaseFileUpload = () => {
             previewState ?
               <>
                 <Row>
-                  <Posting
-                    images={previewState.images}
-                    id=""
-                    title={previewState.title}
-                    username=""
-                    body={previewState.body}
-                    crowns=""
-                    tags={previewState.tags}
-                  /> 
+                  <Col>
+                    <Posting
+                      images={previewState.images}
+                      id=""
+                      title={previewState.title}
+                      username=""
+                      body={previewState.body}
+                      crowns=""
+                      tags={previewState.tags}
+                    /> 
+                  </Col>
                 </Row>
                 <Row>
                   <Col>

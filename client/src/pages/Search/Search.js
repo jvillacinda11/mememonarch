@@ -120,18 +120,23 @@ function Search() {
       <Row>
       {
         resultsState.results.length
-              ? resultsState.results.map((results, i) => <Posting 
-              key={i}
-               id={results._id}
-               title={results.title}
-               username={results.author.username}
-               body={results.body}
-               crowns={results.crowns}
-               images={results.images}
-               tags={results.tags}
-               authid = {results.author._id}
-               profilePage= {false}
-               otherprofilepage={false}/>)
+              ? resultsState.results.map((results, i) => 
+              <Col md="4">
+                <Posting 
+                  key={i}
+                  id={results._id}
+                  title={results.title}
+                  username={results.author.username}
+                  body={results.body}
+                  crowns={results.crowns}
+                  images={results.images}
+                  tags={results.tags}
+                  authid = {results.author._id}
+                  profilePage= {false}
+                  otherprofilepage={false}
+                />
+              </Col>
+              )
           : null
       }
 
