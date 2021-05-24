@@ -27,7 +27,17 @@ const Post = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
-  })
+  }),
+
+  //shweta added below 05/21/21
+ createcomments: (commentInfo) => axios.post(`api/posts/comment/${commentInfo._id}`, 
+   commentInfo, {
+   headers: {
+     Authorization: `Bearer ${localStorage.getItem('user')}`
+   }
+ }),
+  getFromPost: _id => axios.get(`api/posts//comments/${_id}`)
+  
 
 }
 

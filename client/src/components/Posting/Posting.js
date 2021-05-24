@@ -4,7 +4,7 @@ import React from 'react';
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button,
-  Col
+  Col, CardContent, TextField, InputGroup, InputGroupAddon, Input
 } from 'reactstrap';
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
@@ -12,9 +12,13 @@ import './Posting.css'
 import Upvote from 'react-upvote';
 import Post from '../../utils/Post'
 
-const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
 
 
+const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage, comment, handleCommentInput, handleComment, update, setUpdate, postId}) => {
+
+  //shweta added below 05/21/21
+  const [commentList, setCommentList] = useState([])
+  
   const [voteState, setVoteState] = useState({
     currentCrowns : crowns
   })
@@ -26,6 +30,18 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
     window.location = '/OtherUserProfile'
 
   }
+
+  //shweta added 05/21/21 //renders on page load and re-renders when update is triggered
+  useEffect(() => {
+    Post.getFromPost(postId)
+      .then(({ data: postComments }) => {
+        setCommentList(postComments)
+        setUpdate('Up-to-Date')
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }, [update])
 
   // const Upvote = require('react-upvote');
   // <Upvote
@@ -170,7 +186,25 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                       </Button>
 
                     </CardSubtitle>
+                   
+                    {/* <CardSubtitle>
+                      <InputGroup size="sm">
+                        <InputGroupAddon addonType="prepend">@sm</InputGroupAddon>
+                        <Input
+                          id={postId}
+                          label="Add a comment..."
+                          type="comment"
+                          value={comment._id === postId ? comment.body : ""}
+                          onChange={handleCommentInput}
+                          
+                        />
+
+                      </InputGroup>
+                      <Button onClick={handleComment}>Post</Button>
+                    </CardSubtitle> */}
+                    
                   </>
+                  
               }
             </CardBody>
           </Card>

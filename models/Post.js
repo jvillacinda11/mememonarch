@@ -17,6 +17,10 @@ const Post = new Schema({
     type: String,
     default: null
   }],
+  comments: [{                         //shweta added 05/21
+    type: String,                      //type: Schema.Types.ObjectId,
+    default: null                      // ref: 'Comment'
+    }],
   //shweta added
   created:{type: Date, default: Date.now}
 })

@@ -14,6 +14,7 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
     author: req.user._id,
     images: req.body.link,
     tags: req.body.tags
+    //comments: req.body.comments         //shweta added 05/21/21
   })
     .then(post => {
       User.findByIdAndUpdate(req.user._id, { $push: { posts: post._id } })
@@ -24,6 +25,7 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
             body: post.body,
             author: req.user,
             images: post.images
+           // comments: post.comments         //shweta added 05/21/21
           })
         })
         .catch(err => console.log(err))
@@ -38,8 +40,8 @@ router.post('/posts', passport.authenticate('jwt'), (req, res) => {
 //made it so you don't have to be logged in to see posts
 router.get('/posts', (req, res) => {
   Post.find({})
-    .populate('author')
-    .then(posts => res.json(posts))
+    .populate('author')                  //.populate('comments')              //shweta added 05/21/21
+    .then(posts => res.json(posts))                       
     .catch(err => console.log(err))
 })
 
@@ -82,5 +84,35 @@ router.put('/posts/repeatVote/:id', passport.authenticate('jwt'), (req, res) => 
   })
   .catch(err => console.log(err))
 })
+
+//shweta added below for comments 05/21/21
+router.post('/posts/comment/:id', passport.authenticate('jwt'), (req, res) => {
+  Post.create({
+    comments: req.body.comment,
+    post: req.params._id,
+    user: req.user._id
+  })
+    .then(cmnt => {
+      User.findByIdAndUpdate(req.params._id, { $push: { comments: cmnt._id } })
+        .populate('author')
+        .then(() => res.json(cmnt))
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
+})
+//shweta added below for comments 05/21/21
+router.put('/posts/comment/:comment_id', passport.authenticate('jwt'), (req, res) => {
+  Post.findByIdAndUpdate(req.params.comment_id, req.body)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
+})
+
+//shweta added below for comments 05/21/21
+router.delete('/posts/comment/:_id', passport.authenticate('jwt'), (req, res) => {
+  Post.findByIdAndDelete(req.params._id)
+    .then(() => res.sendStatus(200))
+    .catch(err => console.log(err))
+})
+
 
 module.exports = router
