@@ -22,6 +22,7 @@ const AppBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen)
+  const close = () => setIsOpen(false)
 
   const handleLogOut = () => {
     localStorage.removeItem('user')
@@ -43,7 +44,7 @@ const AppBar = () => {
     <Navbar color='light' light expand='md'>
       <img id="logo" src={Logo} alt="King Pepe" />
       <Link to='/' className='link'>
-        <NavbarBrand>MemeMonarch</NavbarBrand>
+        <NavbarBrand onClick= {close}>MemeMonarch</NavbarBrand>
       </Link>
 
       <NavbarToggler onClick={toggle} />
@@ -60,12 +61,12 @@ const AppBar = () => {
           {
             !isLoggedIn &&
             <>
-            <NavItem>
+            <NavItem onClick={toggle}>
               <Link to='/login' className='link'>
                 <NavLink>Register/Login</NavLink>
               </Link>
             </NavItem>
-            <NavItem>
+            <NavItem onClick= {toggle}>
               <Link to = '/search' className ='link'>
                 <NavLink>Search</NavLink>
               </Link>
@@ -76,7 +77,7 @@ const AppBar = () => {
           {
             isLoggedIn &&
             <>
-              <NavItem>
+              <NavItem onClick={toggle}>
                 <Link to='/profile' className='link'>
                   <NavLink>My Profile</NavLink>
                 </Link>
@@ -86,7 +87,7 @@ const AppBar = () => {
                     <NavLink>Home</NavLink>
                   </Link>
                 </NavItem> */}
-              <NavItem>
+              <NavItem onClick={toggle}>
                 <Link to='/Upload' className='link'>
                   <NavLink>Upload</NavLink>
                 </Link>
@@ -94,7 +95,7 @@ const AppBar = () => {
               <NavItem>
                 <NavLink className='link' onClick={handleLogOut}>Log Out</NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={toggle}>
                 <Link to='/search' className='link'>
                   <NavLink>Search</NavLink>
                 </Link>
