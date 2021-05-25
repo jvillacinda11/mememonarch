@@ -4,20 +4,24 @@ import React from 'react';
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button,
-  Col
+  Col, Form, FormGroup, Label, Input, Container,
+  Row, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 import './Posting.css'
-import Upvote from 'react-upvote';
+import Upvote from 'react-upvote'
 import Post from '../../utils/Post'
+import User from '../../utils/User';
 
 const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
 
+ //modal toggle parts
+  const [modalShow, setModalShow] = useState(false) 
 
-  const [voteState, setVoteState] = useState({
-    currentCrowns : crowns
-  })
+  const showModal = () => {setModalShow(true)}
+
+  const hideModal = () => {setModalShow(false)}
 
 
   const ProfileSearch = data => {
@@ -27,6 +31,31 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
   }
 
+  const [loginState, setLoginState] = useState({
+    un: '',
+    pw: ''
+  })
+  const handleInputChange = ({ target }) => {
+    setLoginState({ ...loginState, [target.name]: target.value })
+  }
+  const handleLogin = event => {
+    event.preventDefault()
+
+    User.login({
+      username: loginState.un,
+      password: loginState.pw
+    })
+    .then( ({data}) => {
+      if( data === null ){
+        alert('not valid password')
+      }
+      else{
+        localStorage.setItem('user', data)
+        window.location.reload()
+
+      }
+    })
+  }
   // const Upvote = require('react-upvote');
   // <Upvote
   //   voteStatus={user.votes[postData.id] || 0}
@@ -79,7 +108,10 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      showModal()
+    })
 
 
 
@@ -127,11 +159,56 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        showModal()
+      })
   }
 
   return (
     <>
+    
+    <Modal isOpen={modalShow} onHide={hideModal} centered>
+
+    <ModalHeader>
+      <h3>Login</h3>
+    </ModalHeader>
+
+    <ModalBody>
+      <p className="link">
+      New User? Register Here.
+      </p>
+    <Form>
+      <FormGroup>
+        <Input
+        type= 'text'
+        name= 'un'
+        value= {loginState.un}
+        onChange= {handleInputChange}
+        placeholder= 'Username'
+        />
+      </FormGroup>
+    <FormGroup>
+        <Input
+        type= 'password'
+        name= 'pw'
+        value= {loginState.pw}
+        onChange={handleInputChange}
+        placeholder= 'Password'
+        />
+      </FormGroup>
+    </Form>
+    
+
+    </ModalBody>
+
+    <ModalFooter>
+      <Button onClick={hideModal}>Exit</Button>
+      <Button onClick={handleLogin}> Login</Button>
+
+    </ModalFooter>
+    </Modal>
+   
       { images ?
         <Col sm= "12" md = "4">
           <Card>
