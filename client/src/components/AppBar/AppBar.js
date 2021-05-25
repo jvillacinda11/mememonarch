@@ -61,12 +61,12 @@ const AppBar = () => {
           {
             !isLoggedIn &&
             <>
-            <NavItem onClick={toggle}>
+            <NavItem onClick={close}>
               <Link to='/login' className='link'>
                 <NavLink>Register/Login</NavLink>
               </Link>
             </NavItem>
-            <NavItem onClick= {toggle}>
+            <NavItem onClick= {close}>
               <Link to = '/search' className ='link'>
                 <NavLink>Search</NavLink>
               </Link>
@@ -77,7 +77,7 @@ const AppBar = () => {
           {
             isLoggedIn &&
             <>
-              <NavItem onClick={toggle}>
+              <NavItem onClick={close}>
                 <Link to='/profile' className='link'>
                   <NavLink>My Profile</NavLink>
                 </Link>
@@ -87,7 +87,7 @@ const AppBar = () => {
                     <NavLink>Home</NavLink>
                   </Link>
                 </NavItem> */}
-              <NavItem onClick={toggle}>
+              <NavItem onClick={close}>
                 <Link to='/Upload' className='link'>
                   <NavLink>Upload</NavLink>
                 </Link>
@@ -95,7 +95,7 @@ const AppBar = () => {
               <NavItem>
                 <NavLink className='link' onClick={handleLogOut}>Log Out</NavLink>
               </NavItem>
-              <NavItem onClick={toggle}>
+              <NavItem onClick={close}>
                 <Link to='/search' className='link'>
                   <NavLink>Search</NavLink>
                 </Link>
