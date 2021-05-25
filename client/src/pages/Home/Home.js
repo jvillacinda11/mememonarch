@@ -3,6 +3,7 @@ import {
   Button, Form, FormGroup, Label, Input,
   Container, Row, Col
 } from 'reactstrap'
+import User from '../../utils/User'
 import Post from '../../utils/Post'
 import Posting from '../../components/Posting'
 import '../../App.css'
@@ -10,14 +11,18 @@ import '../../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css'
 
+let favorites = []
+User.profile()
+  .then(res => {
+    favorites = res.data.favorites
+  })
+  .catch(err => console.log(err))
 
 function Home() {
+
   const [postState, setPostState] = useState({
     posts: []
   })
-
-
-
 
   //shweta added code in use effect for sorting post recent
 
@@ -25,10 +30,8 @@ function Home() {
     Post.getAll({})
       .then(({ data: posts }) => {
         let arr = posts.sort((a, b) => new Date(a.created) - new Date(b.created)).reverse()
-
-        setPostState({ ...postState, posts:arr })
         
-        console.log(arr)
+        setPostState({ ...postState, posts:arr })
       })
       .catch(err => {
         console.error(err)
@@ -55,6 +58,7 @@ function Home() {
                     tags= {post.tags}
                     profilePage={false}
                     otherprofilepage ={false}
+                    favorite={favorites.indexOf(post._id) !== -1}
                   />
                 </Col>
               )) : null
