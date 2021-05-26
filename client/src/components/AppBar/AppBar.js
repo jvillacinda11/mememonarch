@@ -7,10 +7,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  InputGroup,
-  InputGroupText,
-  InputGroupAddon,
-  Input
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import User from '../../utils/User'
@@ -22,7 +18,10 @@ const AppBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen)
-  const close = () => setIsOpen(false)
+  const close = () => {
+    setIsOpen(false)
+    localStorage.removeItem('scrollPos')
+  }
 
   const handleLogOut = () => {
     localStorage.removeItem('user')
@@ -36,10 +35,7 @@ const AppBar = () => {
       .catch(() => setIsLoggedIn(false))
   }, [])
 //        this is where my send to route search and the search text that will be sent there goes.cd
-  const handleFormSubmit = event => {
-    event.preventDefault()
-    // alert('hi')
-  }
+
   return (
     <Navbar color='light' light expand='md' className='navbarmargin' fixed='top'>
       <img id="logo" src={Logo} alt="King Pepe" />
@@ -49,14 +45,6 @@ const AppBar = () => {
 
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
-        {/* <Nav navbar>
-          <InputGroup id="searchBar">
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>Search</InputGroupText>
-            </InputGroupAddon>
-            <Input />
-          </InputGroup>
-        </Nav> */}
         <Nav navbar>
           {
             !isLoggedIn &&
@@ -82,11 +70,6 @@ const AppBar = () => {
                   <NavLink>My Profile</NavLink>
                 </Link>
               </NavItem>
-              {/* <NavItem>
-                  <Link to='/' className='link'>
-                    <NavLink>Home</NavLink>
-                  </Link>
-                </NavItem> */}
               <NavItem onClick={close}>
                 <Link to='/Upload' className='link'>
                   <NavLink>Upload</NavLink>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import {
-  Button, Form, FormGroup, Label, Input,
-  Container, Row, Col
+  Container, Row
 } from 'reactstrap'
 import User from '../../utils/User'
 import Post from '../../utils/Post'
@@ -20,10 +19,19 @@ User.profile()
 
 function Home() {
 
+  useEffect(() => {
+    if(localStorage.getItem('scrollPos')){
+    window.scrollTo({
+      top: JSON.parse(localStorage.getItem('scrollPos')),
+      behavior: 'smooth'
+    })
+  }
+  })
+
   const [postState, setPostState] = useState({
     posts: []
   })
-
+  
   //shweta added code in use effect for sorting post recent
 
   useEffect(() => {

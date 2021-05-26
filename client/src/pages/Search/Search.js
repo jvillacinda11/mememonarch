@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col} from 'reactstrap'
 // import User from '../../utils/User'
 import axios from 'axios'

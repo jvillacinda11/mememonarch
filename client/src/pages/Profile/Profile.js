@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import {
   Card, CardText, CardBody,
   CardTitle, CardSubtitle,
-  Container, Row, Col, Button
+  Container, Row, Col
 } from 'reactstrap'
 import User from '../../utils/User'
 import Post from '../../utils/Post'
@@ -15,7 +15,6 @@ let allPosts = []
 Post.getEveryPost()
   .then(posts => {
     allPosts = posts.data
-    console.log(allPosts)
   })
   .catch(err => console.log(err))
 
@@ -27,6 +26,13 @@ User.profile()
   .catch(err => console.log(err))
 
 function Profile() {
+
+  useEffect(() => {
+    window.scrollTo({
+      top: JSON.parse(localStorage.getItem('scrollPos')),
+      behavior: 'smooth'
+    })
+  })
 
   const [profileState, setProfileState] = useState({
     user: {}
