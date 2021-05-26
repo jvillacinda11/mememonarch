@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const Post = {
+  getEveryPost: () => axios.get('/api/posts/all'),
   getAll: () => axios.get('/api/posts', {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
@@ -18,17 +19,18 @@ const Post = {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
   }),
+
   repeatVote: (id, newvote, up, down, voteId) => axios.put(`/api/posts/repeatVote/${id}`, {vote: newvote, upvoteUpdate: up, downvoteUpdate: down, vId: voteId}, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
   }),
+
   checkVote: (id) => axios.get(`/api/searchUsers/likedHistory/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
   })
-
 }
 
 export default Post

@@ -77,10 +77,10 @@ function Search() {
    {/* this is going to be the search by title form */}
    <Row className= 'searchBox'>
   <Form inline onSubmit = {handleSearchTitle}>
-  <Container className ="center brown">
+  <Container className ="center">
   <h4>Search by Title</h4>
     <Row xs ="4">
-      <Col>
+      <Col md='12' xs='12' className='inputLine'>
       <FormGroup className= "mb-2 mr-sm-2 mb-sm-0">
         <Label htmlFor= "title" className= "mr-sm-2"></Label>
         <Input
@@ -91,16 +91,19 @@ function Search() {
         ></Input>
       </FormGroup>
       </Col>
+      <Col md='12' xs='12'>
+       <Button onClick = {handleSearchTitle}>Search</Button> 
+      </Col>
     </Row>
-    <Button onClick = {handleSearchTitle}>Search</Button>
+    
   </Container>
    </Form>
 
       <Form inline onSubmit={handleSearchTag}>
-        <Container className="center brown">
+        <Container className="center">
           <h4>Search by Tag</h4>
           <Row xs="4">
-            <Col>
+            <Col md='12' xs='12' className='inputLine'>
               <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                 <Label htmlFor="tag" className="mr-sm-2"></Label>
                 <Input
@@ -111,8 +114,11 @@ function Search() {
                 ></Input>
               </FormGroup>
             </Col>
+            <Col md='12' xs='12'>
+              <Button onClick ={handleSearchTag}>Search</Button>
+            </Col>
           </Row>
-          <Button onClick ={handleSearchTag}>Search</Button>
+          
         </Container>
       </Form>
       </Row>
@@ -131,7 +137,9 @@ function Search() {
                tags={results.tags}
                authid = {results.author._id}
                profilePage= {false}
-               otherprofilepage={false}/>)
+               otherprofilepage={false}
+               uploadpage={false}
+               />)
           : null
       }
 
@@ -145,14 +153,3 @@ function Search() {
 export default Search;
 
 // good reference https://github.com/oze4/react-navbar-search-with-routing
-
-{/* <Container>
-  <Row>
-    {
-      postState.posts.length
-        ? postState.posts.map(post => (
-          <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} />
-        )) : null
-    }
-  </Row>
-</Container> */}
