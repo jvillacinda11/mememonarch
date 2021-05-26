@@ -80,7 +80,6 @@ const ReactFirebaseFileUpload = () => {
         },
         error => {
           console.log(error)
-
         },
         () => {
           storage
@@ -88,116 +87,94 @@ const ReactFirebaseFileUpload = () => {
             .child(image.name)
             .getDownloadURL()
             .then(url => {
+              console.log(url)
               setUrl(url)
-              const tags = previewState.tags
-              Post.create({
-                title: postState.title,
-                body: postState.body,
-                link: url,
-                tags
-              })
-                .then(res => window.location = '/')
-              // if (postState.tag1 !== '' && postState.tag2 !== '') {
-              //   tags.push(postState.tag1, postState.tag2)
-              //   Post.create({
-              //     title: postState.title,
-              //     body: postState.body,
-              //     link: url,
-              //     tags: tags
-              //   })
-              //     .then(res => {
-              //       window.location = '/'
-              //     })
-              // }
-              // if (postState.tag1 === '' && postState.tag2 !== '') {
-              //   tags.push(postState.tag2)
-              //   Post.create({
-              //     title: postState.title,
-              //     body: postState.body,
-              //     link: url,
-              //     tags: tags
-              //   })
-              //     .then(res => {
-              //       window.location = '/'
-              //     })
-              // }
-              // if (postState.tag1 === '' && postState.tag2 === '') {
-              //   Post.create({
-              //     title: postState.title,
-              //     body: postState.body,
-              //     link: url,
-              //   })
-              //     .then(res => {
-              //       window.location = '/'
-              //     })
-              // }
+              const tags = []
+              if (postState.tag1 !== '' && postState.tag2 !== '') {
+                tags.push(postState.tag1, postState.tag2)
+                Post.create({
+                  title: postState.title,
+                  body: postState.body,
+                  link: url,
+                  tags: tags
+                })
+                  .then(res => {
+                    window.location = '/'
+                  })
+              }
+              if (postState.tag1 === '' && postState.tag2 !== '') {
+                tags.push(postState.tag2)
+                Post.create({
+                  title: postState.title,
+                  body: postState.body,
+                  link: url,
+                  tags: tags
+                })
+                  .then(res => {
+                    window.location = '/'
+                  })
+              }
+              if (postState.tag1 === '' && postState.tag2 === '') {
+                Post.create({
+                  title: postState.title,
+                  body: postState.body,
+                  link: url,
+                })
+                  .then(res => {
+                    window.location = '/'
+                  })
+              }
             })
         }
       )
     } else {
-      Post.create({
-        title: postState.title,
-        body: postState.body,
-        link: url,
-        tags: previewState.tags
-      })
-        .then(res => {
-          window.location = '/'
+      const tags = []
+      if (postState.tag1 !== '' && postState.tag2 !== '') {
+        tags.push(postState.tag1, postState.tag2)
+        Post.create({
+          title: postState.title,
+          body: postState.body,
+          link: url,
+          tags: tags
         })
-      // if (postState.tag1 !== '' && postState.tag2 !== '') {
-      //   tags.push(postState.tag1, postState.tag2)
-      //   Post.create({
-      //     title: postState.title,
-      //     body: postState.body,
-      //     link: url,
-      //     tags: tags
-      //   })
-
-      //     .then(res => {
-
-      //       window.location = '/'
-      //     })
-      // }
-      // if (postState.tag1 === '' && postState.tag2 !== '') {
-      //   tags.push(postState.tag2)
-      //   Post.create({
-      //     title: postState.title,
-      //     body: postState.body,
-      //     link: url,
-      //     tags: tags
-      //   })
-
-      //     .then(res => {
-
-      //       window.location = '/'
-      //     })
-      // }
-      // if (postState.tag1 !== '' && postState.tag2 === '') {
-      //   tags.push(postState.tag1)
-      //   Post.create({
-      //     title: postState.title,
-      //     body: postState.body,
-      //     link: url,
-      //     tags: tags
-      //   })
-
-      //     .then(res => {
-
-      //       window.location = '/'
-      //     })
-      // }
-      // if (postState.tag1 === '' && postState.tag2 === '') {
-      //   Post.create({
-      //     title: postState.title,
-      //     body: postState.body,
-      //     link: url,
-      //   })
-
-      //     .then(res => {
-
-      //       window.location = '/'
-      //     })
-      // }
+          .then(res => {
+            window.location = '/'
+          })
+      }
+      if (postState.tag1 === '' && postState.tag2 !== '') {
+        tags.push(postState.tag2)
+        Post.create({
+          title: postState.title,
+          body: postState.body,
+          link: url,
+          tags: tags
+        })
+          .then(res => {
+            window.location = '/'
+          })
+      }
+      if (postState.tag1 !== '' && postState.tag2 === '') {
+        tags.push(postState.tag1)
+        Post.create({
+          title: postState.title,
+          body: postState.body,
+          link: url,
+          tags: tags
+        })
+          .then(res => {
+            window.location = '/'
+          })
+      }
+      if (postState.tag1 === '' && postState.tag2 === '') {
+        Post.create({
+          title: postState.title,
+          body: postState.body,
+          link: url,
+        })
+          .then(res => {
+            window.location = '/'
+          })
+      }
     }
     //ends here
   }
