@@ -1,6 +1,7 @@
 .link {
   text-decoration: none;
   color: inherit;
+  font-weight: 750;
 }
 
 .link:hover {
