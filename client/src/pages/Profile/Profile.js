@@ -41,6 +41,8 @@ function Profile() {
   const deletepost = (id) => {
     Post.delete(id)
       .then(() => {
+        let scrollPos = window.scrollY
+        localStorage.setItem('scrollPos', scrollPos)
         window.location.reload()
       })
       .catch(err => {
