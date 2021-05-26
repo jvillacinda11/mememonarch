@@ -23,6 +23,22 @@ router.get('/users', passport.authenticate('jwt'), (req, res) => {
   res.json(req.user)
 })
 
+router.post('/users/favorites', passport.authenticate('jwt'), (req, res) => {
+  if(req.body._id !== "") {
+    if (req.user.favorites.indexOf(req.body._id) === -1) {
+      User.findByIdAndUpdate(req.user._id, { $push: { favorites: req.body._id }})
+        .then(() => {
+          res.sendStatus(200)
+        })
+    } else {
+      User.findByIdAndUpdate(req.user._id, { $pull: { favorites: req.body._id } })
+        .then(() => {
+          res.sendStatus(200)
+        })
+    }
+  }
+})
+
 // router.get('/users/search/:username', (req, res ) =>{
 //   User.find({ username: { "$regex": req.params.username, "$options": "i" }}, 'username _id').exec(function (err, data){
 //     if (err) console.log(err)

@@ -153,14 +153,3 @@ function Search() {
 export default Search;
 
 // good reference https://github.com/oze4/react-navbar-search-with-routing
-
-{/* <Container>
-  <Row>
-    {
-      postState.posts.length
-        ? postState.posts.map(post => (
-          <Posting id={post._id} title={post.title} username={post.author.username} body={post.body} />
-        )) : null
-    }
-  </Row>
-</Container> */}

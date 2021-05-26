@@ -10,14 +10,30 @@ import {
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 import './Posting.css'
-import Upvote from 'react-upvote'
+import User from '../../utils/User'
 import Post from '../../utils/Post'
-import User from '../../utils/User';
 
-const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage, uploadpage }) => {
+const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage, uploadpage, favorite }) => {
 
   //modal toggle parts
   const [modalShow, setModalShow] = useState(false)
+
+  const addFavorite = event => {
+    event.preventDefault()
+
+
+
+    User.addFavorite(id)
+    .then(() =>{
+     window.location.reload()
+    if (event.target.innerHTML === "Add to Royal Vault") event.target.innerHTML = "Remove from Royal Vault"
+    else event.target.innerHTML = "Add to Royal Vault"        
+    })
+    .catch(err =>{
+       console.log(err)
+       showModal()
+      })
+  }
 
   const showModal = () => { setModalShow(true) }
 
@@ -28,12 +44,10 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
     })
   }
 
-
   const ProfileSearch = data => {
     //data is the user._id with which we search
     localStorage.setItem('searchUser', data)
     window.location = '/OtherUserProfile'
-
   }
 
   const [loginState, setLoginState] = useState({
@@ -224,6 +238,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                 <CardImg top width="100%" src={images} alt="Card image cap" />
                 <CardBody>
                   <CardTitle tag="h5">{title}</CardTitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle>
                   <CardText>{body}</CardText>
                   {tags.length > 0 ?
                     <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
@@ -283,8 +298,11 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                       <Button color='light' light expand='md' onClick={handledownvote}>
                         <img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />
                       </Button>
-
+                      
                     </CardSubtitle>
+                    <Button onClick={addFavorite}>
+                      {favorite ? "Remove from Royal Vault" : "Add to Royal Vault"}
+                    </Button>
                   </>
               }
             </CardBody>
@@ -321,6 +339,9 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                       </Button>
 
                     </CardSubtitle>
+                    <Button onClick={addFavorite}>
+                      {favorite ? "Remove from Royal Vault" : "Add to Royal Vault"}
+                    </Button>
                   </>
               }
             </CardBody>
