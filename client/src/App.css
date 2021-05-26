@@ -51,7 +51,7 @@ display: block !important;
 }
 
 .brown {
-  background-color: rgb(93, 182, 81);
+  background-color: rgba(73, 73, 87, 0.11);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;

@@ -55,6 +55,7 @@ function Home() {
                   tags= {post.tags}
                   profilePage={false}
                   otherprofilepage ={false}
+                  uploadpage= {false}
                 />
               )) : null
           }

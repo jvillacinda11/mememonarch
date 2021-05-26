@@ -14,7 +14,7 @@ import Upvote from 'react-upvote'
 import Post from '../../utils/Post'
 import User from '../../utils/User';
 
-const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage }) => {
+const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage, uploadpage }) => {
 
   //modal toggle parts
   const [modalShow, setModalShow] = useState(false)
@@ -216,8 +216,43 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
         </ModalFooter>
       </Modal>
-
-      { images ?
+      {uploadpage ? 
+      <>
+          {images ?
+            <Col md='12' xs='12'>
+              <Card>
+                <CardImg top width="100%" src={images} alt="Card image cap" />
+                <CardBody>
+                  <CardTitle tag="h5">{title}</CardTitle>
+                  <CardText>{body}</CardText>
+                  {tags.length > 0 ?
+                    <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
+                    : null}
+                  <CardSubtitle>
+                  </CardSubtitle>
+                </CardBody>
+              </Card>
+            </Col>
+            :
+            <Col md='12' xs='12'>
+              <Card>
+                <CardBody>
+                  <CardTitle tag="h5">{title}</CardTitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle>
+                  <CardText>{body}</CardText>
+                  {tags.length > 0 ?
+                    <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
+                    : null}
+                  <CardSubtitle>
+                  </CardSubtitle>
+                </CardBody>
+              </Card>
+            </Col>
+          }
+      </>
+      :
+      <> 
+{ images ?
         <Col sm="12" md="4">
           <Card>
             <CardImg top width="100%" src={images} alt="Card image cap" />
@@ -232,11 +267,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               {tags.length > 0 ?
                 <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
                 : null}
-              <CardSubtitle>
-
-
-
-              </CardSubtitle>
               {
                 profilePage ?
                   <>
@@ -265,15 +295,14 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
           <Card>
             <CardBody>
               <CardTitle tag="h5">{title}</CardTitle>
-              <CardSubtitle tag="h6" className="mb-2 text-muted link" onClick={() => ProfileSearch(authid)}>Posted by {username}</CardSubtitle>
+                  {
+                    otherprofilepage ? <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle> : <CardSubtitle tag="h6" className="mb-2 text-muted ">Posted by <span className="link" onClick={() => ProfileSearch(authid)}>{username}</span></CardSubtitle>
+                  }
               <CardText>{body}</CardText>
-              {tags ?
+              {tags.length > 0 ?
                 <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
                 : null}
-              <CardSubtitle>
 
-
-              </CardSubtitle>
               {
                 profilePage ?
                   <>
@@ -298,6 +327,9 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
           </Card>
         </Col>
       }
+      </>
+       }
+      
     </>
   )
 }

@@ -190,10 +190,10 @@ const ReactFirebaseFileUpload = () => {
 
   return (
     <Container className="center brown">
-      <Row>
-        <Col sm={{ size: 4, offset: 1 }}>
-          {/* <progress value={progress} max="100" /> */}
           <h1>Create A Post</h1>
+      <Row>
+        <Col md='6' xs='12'>
+          {/* <progress value={progress} max="100" /> */}
           <Form >
             <FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
               <Label htmlFor='title' className='mr-sm-2'>Title</Label>
@@ -240,11 +240,10 @@ const ReactFirebaseFileUpload = () => {
 
           
         </Col>
-        <Col sm={{ size: 4, offset: 2 }}>
+        <Col md='6' xs='12'>
           {
             previewState ?
               <>
-                <Row>
                   <Posting
                     images={previewState.images}
                     id=""
@@ -253,13 +252,11 @@ const ReactFirebaseFileUpload = () => {
                     body={previewState.body}
                     crowns=""
                     tags={previewState.tags}
-                  /> 
-                </Row>
-                <Row>
-                  <Col>
+                    uploadpage={true}
+                  />  
+                  <Col md='12' xs='12'>
                     <Button onClick={handleUpload}>Create Post</Button>
                   </Col>
-                </Row>
               </>: null
           }
         </Col>
