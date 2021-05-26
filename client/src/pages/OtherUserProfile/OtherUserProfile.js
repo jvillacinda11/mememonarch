@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
 import {
-  Card, CardText, CardBody,
-  CardTitle, CardSubtitle,
-  Container, Row, Col
+Container, Row, Col
 } from 'reactstrap'
 import User from '../../utils/User'
-import Post from '../../utils/Post'
 
 import Posting from '../../components/Posting'
 
@@ -13,6 +10,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function OtherUserProfile() {
 
+  useEffect(() => {
+    window.scrollTo({
+      top: JSON.parse(localStorage.getItem('scrollPos')),
+      behavior: 'smooth'
+    })
+    console.log(JSON.parse(localStorage.getItem('scrollPos')))
+    console.log(window.pageYOffset)
+  })
   const [profileState, setProfileState] = useState({
     user: {}
   })

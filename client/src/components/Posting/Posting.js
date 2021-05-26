@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react'
-import { PromiseProvider } from 'mongoose';
+import { useState } from 'react'
 import React from 'react';
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button,
-  Col, Form, FormGroup, Label, Input, Container,
-  Row, Modal, ModalHeader, ModalBody, ModalFooter
+  Col, Form, FormGroup, Input,
+   Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import downcrown from '../../assets/images/crown-down.png'
 import upcrown from '../../assets/images/crown-up.png'
 import './Posting.css'
 import User from '../../utils/User'
 import Post from '../../utils/Post'
+
+
 
 const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, profilePage, authid, otherprofilepage, uploadpage, favorite }) => {
 
@@ -20,14 +21,13 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
   const addFavorite = event => {
     event.preventDefault()
-
-
-
     User.addFavorite(id)
     .then(() =>{
-     window.location.reload()
-    if (event.target.innerHTML === "Add to Royal Vault") event.target.innerHTML = "Remove from Royal Vault"
-    else event.target.innerHTML = "Add to Royal Vault"        
+      let scrollPos = window.scrollY
+      localStorage.setItem('scrollPos', scrollPos)
+      if (event.target.innerHTML === "Add to Royal Vault") event.target.innerHTML = "Remove from Royal Vault"
+      else event.target.innerHTML = "Add to Royal Vault"        
+      window.location.reload()
     })
     .catch(err =>{
        console.log(err)
@@ -46,6 +46,7 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
   const ProfileSearch = data => {
     //data is the user._id with which we search
+    localStorage.removeItem('scrollPos')
     localStorage.setItem('searchUser', data)
     window.location = '/OtherUserProfile'
   }
@@ -71,11 +72,11 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
         else {
           localStorage.setItem('user', data)
           window.location.reload()
-
         }
       })
   }
   const navToReg = () => {
+    localStorage.removeItem('scrollPos')
     window.location = '/login'
   }
   // const Upvote = require('react-upvote');
@@ -96,7 +97,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
       .then(({ data }) => {
         //this conditional is for liking posts that have already been interacted with
         if (data.likedHistory.length > 0) {
-          console.log(data)
           let up = data.likedHistory[0].upvoteActive
           let down = data.likedHistory[0].downvoteActive
           let voteId = data.likedHistory[0]._id
@@ -107,18 +107,36 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
             let upvoteUpdate = true
             let downvoteUpdate = false
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+              .then(() => {
+                let scrollPos = window.scrollY
+                localStorage.setItem('scrollPos', scrollPos)
+                window.location.reload()
+              })
+              .catch(err => console.log(err))
           }
           if (up) {
             let vote = crowns - 1
             let upvoteUpdate = false
             let downvoteUpdate = false
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+              .then(() => {
+                let scrollPos = window.scrollY
+                localStorage.setItem('scrollPos', scrollPos)
+                window.location.reload()
+              })
+              .catch(err => console.log(err))
           }
           if (up === false && down === false) {
             let vote = crowns + 1
             let upvoteUpdate = true
             let downvoteUpdate = false
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+              .then(() => {
+                let scrollPos = window.scrollY
+                localStorage.setItem('scrollPos', scrollPos)
+                window.location.reload()
+              })
+              .catch(err => console.log(err))
           }
         }
         //this is for liking posts for the first time
@@ -127,6 +145,12 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
           let upvoteUpdate = true
           let downvoteUpdate = false
           Post.vote(id, vote, upvoteUpdate, downvoteUpdate)
+            .then(() => {
+              let scrollPos = window.scrollY
+              localStorage.setItem('scrollPos', scrollPos)
+              window.location.reload()
+            })
+            .catch(err => console.log(err))
 
         }
       })
@@ -144,7 +168,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
       .then(({ data }) => {
         //this conditional is for liking posts that have already been interacted with
         if (data.likedHistory.length > 0) {
-          console.log(data)
           let up = data.likedHistory[0].upvoteActive
           let down = data.likedHistory[0].downvoteActive
           let voteId = data.likedHistory[0]._id
@@ -155,12 +178,24 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
             let upvoteUpdate = false
             let downvoteUpdate = true
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+            .then(() =>{
+              let scrollPos = window.scrollY
+              localStorage.setItem('scrollPos', scrollPos)
+              window.location.reload()
+            })
+            .catch(err => console.log(err))
           }
           if (down) {
             let vote = crowns + 1
             let upvoteUpdate = false
             let downvoteUpdate = false
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+              .then(() => {
+                let scrollPos = window.scrollY
+                localStorage.setItem('scrollPos', scrollPos)
+                window.location.reload()
+              })
+              .catch(err => console.log(err))
 
           }
           if (down === false && up === false) {
@@ -168,6 +203,12 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
             let upvoteUpdate = false
             let downvoteUpdate = true
             Post.repeatVote(id, vote, upvoteUpdate, downvoteUpdate, voteId)
+              .then(() => {
+                let scrollPos = window.scrollY
+                localStorage.setItem('scrollPos', scrollPos)
+                window.location.reload()
+              })
+              .catch(err => console.log(err))
 
           }
 
@@ -178,6 +219,12 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
           let upvoteUpdate = false
           let downvoteUpdate = true
           Post.vote(id, vote, upvoteUpdate, downvoteUpdate)
+            .then(() => {
+              let scrollPos = window.scrollY
+              localStorage.setItem('scrollPos', scrollPos)
+              window.location.reload()
+            })
+            .catch(err => console.log(err))
 
         }
       })
@@ -285,7 +332,17 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               {
                 profilePage ?
                   <>
-                    <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
+                  <CardSubtitle>
+                  <Button color='light' light expand='md' onClick={handleupvote}>
+                        <img id="upvote" src={upcrown} alt="pepefoot" class="icon" />
+                  </Button>
+                      {crowns}
+                  <Button color='light' light expand='md' onClick={handledownvote}>
+                        <img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />
+                  </Button>
+                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
+
+                  </CardSubtitle>
                   </>
                   :
                   <>
@@ -324,7 +381,17 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               {
                 profilePage ?
                   <>
-                    <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
+                  <CardSubtitle>
+                  <Button color='light' light expand='md' onClick={handleupvote}>
+                        <img id="upvote" src={upcrown} alt="pepefoot" class="icon" />
+                  </Button>
+                      {crowns}
+                  <Button color='light' light expand='md' onClick={handledownvote}>
+                        <img id="downvote" src={downcrown} alt="pepefootbutupsidedown" class="icon" />
+                  </Button>
+                  <Button color='secondary' onClick={() => deletepost(id)}>Delete</Button>
+
+                  </CardSubtitle>
                   </>
                   :
                   <>

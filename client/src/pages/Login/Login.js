@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap'
+import { Button, Form, FormGroup, Input, Row, Col } from 'reactstrap'
 import User from '../../utils/User'
 
 import '../../App.css'
