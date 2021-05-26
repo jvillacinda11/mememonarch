@@ -2,8 +2,18 @@
     text-decoration: none;
     color: inherit;
   }
+
   .link:hover {
     text-decoration: underline;
     color: inherit;
     cursor: pointer;
+  }
+
+  html {
+    height: 100%;
+    overflow: auto;
+  }
+
+  body {
+    height: 100%;
   }
