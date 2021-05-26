@@ -41,7 +41,7 @@ const AppBar = () => {
     // alert('hi')
   }
   return (
-    <Navbar color='light' light expand='md'>
+    <Navbar color='light' light expand='md' className='navbarmargin' fixed='top'>
       <img id="logo" src={Logo} alt="King Pepe" />
       <Link to='/' className='link'>
         <NavbarBrand onClick= {close}>MemeMonarch</NavbarBrand>

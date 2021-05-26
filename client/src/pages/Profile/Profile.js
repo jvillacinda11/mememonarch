@@ -75,7 +75,7 @@ function Profile() {
           {
             profileState.user.posts
               ? profileState.user.posts.map(post => (
-                <Col md="4">
+  
                   <Posting
                     id={post._id}
                     title={post.title}
@@ -87,8 +87,9 @@ function Profile() {
                     authid ={profileState.user._id}
                     deletepost={deletepost}
                     profilePage={true}
+                    uploadpage={false}
                   />
-                </Col>
+
               ))
               : null
           }
@@ -103,7 +104,7 @@ function Profile() {
           {
             favorites.length
               ? allPosts.filter(post => favorites.indexOf(post._id) !== -1).map(post => (
-                <Col md="4">
+
                   <Posting
                     id={post._id}
                     title={post.title}
@@ -115,8 +116,9 @@ function Profile() {
                     profilePage={false}
                     authid={post.author.id}
                     favorite={true}
+                    uploadpage={false}
                   />
-                </Col>
+
               ))
               : null
           }

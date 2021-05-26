@@ -47,7 +47,6 @@ function OtherUserProfile() {
           {
             profileState.user.posts
               ? profileState.user.posts.map(post => (
-                <Col md="4">
                   <Posting
                     id={post._id}
                     title={post.title}
@@ -58,7 +57,6 @@ function OtherUserProfile() {
                     tags={post.tags}
                     otherprofilepage = {true}
                   />
-                </Col>
               ))
               : null
           }

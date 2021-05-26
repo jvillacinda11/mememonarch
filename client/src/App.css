@@ -28,7 +28,7 @@
 }
 
 .hh {
-display: block !important;
+  display: block !important;
 }
 
 .gg {
@@ -68,6 +68,12 @@ display: block !important;
   margin-left: auto;
   margin-right: auto;
 }
-.inputLine{
+
+.inputLine {
   margin-bottom: 1rem;
+}
+
+.navbarmargin {
+  position: sticky;
+  top: 0;
 }
