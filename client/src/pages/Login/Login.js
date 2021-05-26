@@ -56,107 +56,102 @@ function Login() {
   }
   return (
     <>
-      <Form inline onSubmit={handleLogin}>
-        <Container className="center brown">
-        <h1 className="searchBox">Login</h1>
-          <Row>
-            <Col xs="3" sm="4">
-              <FormGroup >
-                <Label htmlFor='un'>Username</Label>
-                <Input
-                  type='text'
-                  name='un'
-                  value={loginState.un}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col xs="3" sm="4">
-              <FormGroup>
-                <Label htmlFor='pw' >Password</Label>
-                <Input
-                  type='password'
-                  name='pw'
-                  value={loginState.pw}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
-            </Col>
-            <Col xs="1"sm="2">
-              <Button onClick={handleLogin}>
-              Login</Button>
-            </Col>
-          </Row>
-        </Container>
-
-      </Form>
-
-
-
-      
-        <Container className="center brown reg">
-        <h1 className = "searchBox">Register</h1>
-           <Form inline onSubmit={handleRegister}>
-        <div className = "searchBox">
-          
-              
-                <Label htmlFor='name' >Name</Label>
-                <input className ="d-block form-control form-control-lg"
-                  type='text'
-                  name='name'
-                  value={loginState.name}
-                  onChange={handleInputChange}
-                />
-                
-              
-              
-              
-              
-            
-                 <Label htmlFor='email'>Email-Address</Label>
-                
-                <input className ="d-block form-control form-control-lg"
-                  type='email'
-                  name='email'
-                  value={loginState.email}
-                  onChange={handleInputChange}
-                />
-                
-                        
-               <Label htmlFor='username'>Username</Label> 
-               <input className ="d-block form-control form-control-lg"
-                  type='text'
-                  name='username'
-                  value={loginState.username}
-                  onChange={handleInputChange}
-                /> 
-                
-              
-              
-              
-              
-                <Label htmlFor='password'>Password</Label>
-                <input className ="d-block form-control form-control-lg"
-                  type='password'
-                  name='password'
-                  value={loginState.password}
-                  onChange={handleInputChange}
-                />
-                
-              
-              
+      <Row className= 'justify-content-around'>
+        <Col md='4' xs='12' className= 'center'>
+          <h2>Login</h2>
           <br />
-          <Button className= "w-100" onClick={handleRegister}>Register</Button>
-          
-            </div>
-           </Form>
-        </Container>
-      
+          <Row>
+          <Form inline onSubmit={handleLogin}>
+            <Col xs='12' md='12' className='inputLine'>
+            <FormGroup >
+              <Input
+                type='text'
+                name='un'
+                value={loginState.un}
+                onChange={handleInputChange}
+                placeholder='Username'
+              />
+            </FormGroup>
+            </Col>
+            
+            <Col md='12' xs= '12' className= 'inputLine'>
+            <FormGroup>
+              <Input
+                type='password'
+                name='pw'
+                value={loginState.pw}
+                onChange={handleInputChange}
+                placeholder='Password'
+              />
+            </FormGroup>
+            </Col>
+            <br />
+            <Col xs='12' md= '12'>
+              <Button onClick={handleLogin}>
+                Login</Button>
+            </Col>
+          </Form>
+          </Row>
+        </Col>
 
-
-
-
-
+        <Col md= '6' xs= '12'className=' center'>
+          <h2>Register</h2>
+          <br />
+          <Row>
+            <Form inline onSubmit={handleRegister}>
+              <Col md='12' xs='12' className='inputLine'>
+              <FormGroup>
+                  <Input
+                    type='text'
+                    name='name'
+                    value={loginState.name}
+                    onChange={handleInputChange}
+                    placeholder='Name'
+                  />
+              </FormGroup>
+              </Col>
+              <Col md='12' xs='12' className='inputLine'>
+              <FormGroup>
+                  <Input
+                    type='email'
+                    name='email'
+                    value={loginState.email}
+                    onChange={handleInputChange}
+                    placeholder='Email'
+                  />
+              </FormGroup>
+              </Col>
+              <Col md='12' xs='12' className='inputLine'>
+              <FormGroup>
+                  <Input
+                    type='text'
+                    name='username'
+                    value={loginState.username}
+                    onChange={handleInputChange}
+                    placeholder='Username'
+                  />
+              </FormGroup>
+              </Col>
+              <Col md='12' xs='12' className='inputLine'>
+              <FormGroup>
+                  <Input
+                    type='password'
+                    name='password'
+                    value={loginState.password}
+                    onChange={handleInputChange}
+                    placeholder='Password'
+                  />
+              </FormGroup>
+              </Col>
+              <Col md='12' xs='12' className='inputLine'>
+              <FormGroup>
+                  <Button onClick={handleRegister}>Register</Button>
+              </FormGroup>
+              </Col>
+            </Form>
+          </Row>
+        </Col>
+      </Row>
     </>
   );
 }

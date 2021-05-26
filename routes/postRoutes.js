@@ -7,6 +7,13 @@ const passport = require('passport')
 //                        Locked
 //   shweta
 
+router.get('/posts/all', (req, res) => {
+  Post.find()
+    .populate('author')
+    .then(posts => res.json(posts))
+    .catch(err => console.log(err))
+})
+
 router.post('/posts', passport.authenticate('jwt'), (req, res) => {
   Post.create({
     title: req.body.title,

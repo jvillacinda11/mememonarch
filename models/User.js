@@ -12,6 +12,10 @@ const User = new Schema({
     upvoteActive: Boolean,
     downvoteActive: Boolean,
     postId: String
+  }],
+  favorites: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
   }]
 })
 
