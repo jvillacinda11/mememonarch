@@ -20,7 +20,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
 
   const addFavorite = event => {
     event.preventDefault()
-
     User.addFavorite(id)
     .then(() =>{
      window.location.reload()
