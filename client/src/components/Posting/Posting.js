@@ -285,7 +285,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
                 <CardImg top width="100%" src={images} alt="Card image cap" />
                 <CardBody>
                   <CardTitle tag="h5">{title}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle>
                   <CardText>{body}</CardText>
                   {tags.length > 0 ?
                     <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>
@@ -300,7 +299,6 @@ const Posting = ({ images, id, title, username, body, crowns, tags, deletepost, 
               <Card>
                 <CardBody>
                   <CardTitle tag="h5">{title}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Posted by {username}</CardSubtitle>
                   <CardText>{body}</CardText>
                   {tags.length > 0 ?
                     <CardText>Tags: {tags.map(tag => `| ${tag} `)}|</CardText>

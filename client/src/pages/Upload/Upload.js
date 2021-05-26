@@ -15,6 +15,7 @@ const ReactFirebaseFileUpload = () => {
   const [url, setUrl] = useState("")
   const [progress, setProgress] = useState(0)
   const [previewState, setPreviewState] = useState(null)
+  const[ImageState, setImageState] = useState(null)
   const [postState, setPostState] = useState({
     title: '',
     body: '',
@@ -48,6 +49,7 @@ const ReactFirebaseFileUpload = () => {
             .child(image[0].name)
             .getDownloadURL()
             .then(url => {
+              setImageState(true)
               console.log(url)
               setUrl(url)
             })
@@ -226,7 +228,13 @@ const ReactFirebaseFileUpload = () => {
 
           {/* <p> Firebase my{User.name} image upload!</p> */}
           <DragAndDrop upload={handleChange} />
-
+          {ImageState ? 
+          <>
+         <h6 style={{ color: 'red' }}>Image Saved!</h6>
+          </>
+            : 
+            <h6>No image currently saved</h6>
+          }
           <Button onClick={handlePreview}>Preview Post</Button>
 
           
