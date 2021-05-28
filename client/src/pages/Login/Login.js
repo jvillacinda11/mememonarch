@@ -31,8 +31,17 @@ function Login() {
 
     })
       .then(() => {
-        alert('User registered!')
-        setLoginState({ ...loginState, name: '', email: '', username: '', password: '' })
+        // alert('User registered!')
+        User.login({
+          username: loginState.username,
+          password: loginState.password
+        })
+        .then(({data})=> {
+          setLoginState({ ...loginState, name: '', email: '', username: '', password: '' })
+          localStorage.setItem('user', data)
+          window.location = '/'
+        })
+        .catch(err => console.log(err))
       })
       .catch(err => console.error(err))
   }
