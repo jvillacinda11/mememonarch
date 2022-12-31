@@ -3,20 +3,13 @@ import "firebase/storage";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  // apiKey: "AIzaSyA7Vqg4kbQTB_MofCqzZTSnwtsmB9jvbNE",
-  // authDomain: "mememonarch-de8e2.firebaseapp.com",
-  // projectId: "mememonarch-de8e2",
-  // storageBucket: "mememonarch-de8e2.appspot.com",
-  // messagingSenderId: "413758978445",
-  // appId: "1:413758978445:web:48d88db471dcf45f70a5c4",
-  // measurementId: "G-31B6DC0HGP"
-  apiKey: "AIzaSyCi5B1WAjk0kS0wERbE_30pwrLlGX3-Hz0",
-  authDomain: "fir-react-upload-2.firebaseapp.com",
-  projectId: "fir-react-upload-2",
-  storageBucket: "fir-react-upload-2.appspot.com",
-  messagingSenderId: "627843010163",
-  appId: "1:627843010163:web:94f3fd74ad022bae19e406",
-  measurementId: "G-RC2WX8B7DB"
+  apiKey: "AIzaSyAozrjnaxHgVbYQ3VBE2UvqJ_PbhYFLk3M",
+  authDomain: "mememonarchv2.firebaseapp.com",
+  projectId: "mememonarchv2",
+  storageBucket: "mememonarchv2.appspot.com",
+  messagingSenderId: "992347804688",
+  appId: "1:992347804688:web:238df4ab4daf38a1c32695",
+  measurementId: "G-H9RZPB0WRE"
 };
 
 firebase.initializeApp(firebaseConfig)

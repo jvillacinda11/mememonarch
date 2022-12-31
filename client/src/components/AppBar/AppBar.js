@@ -14,6 +14,7 @@ import './AppBar.css'
 import Logo from '../../assets/images/monarch.gif'
 
 const AppBar = () => {
+  
   const [isOpen, setIsOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
